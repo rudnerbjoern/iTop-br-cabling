@@ -146,25 +146,23 @@
                     <extkey_attcode>remote_a_ci_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-                <!--
-                <field id="remote_a_id" xsi:type="AttributeExternalKey">
-                    <sql>remote_a_id</sql>
-                    <target_class>GenericCommLayer1Interface</target_class>
+                <field id="remote_a_interface_id" xsi:type="AttributeExternalKey">
+                    <sql>remote_a_interface_id</sql>
+                    <target_class>PhysicalInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
-                    <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT GenericCommPhysInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
-                    </filter>
+                    <!-- <filter>
+                        <![CDATA[SELECT PatchPanelPort WHERE cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                    </filter> -->
                     <dependencies>
                         <attribute id="remote_a_ci_id" />
                         <attribute id="interfaceconnector_a_id" />
                     </dependencies>
                 </field>
-                <field id="remote_a_name" xsi:type="AttributeExternalField">
-                    <extkey_attcode>remote_a_id</extkey_attcode>
+                <field id="remote_a_interface_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>remote_a_interface_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-            -->
                 <field id="interfaceconnector_b_id" xsi:type="AttributeExternalKey">
                     <sql>interfaceconnector_b_id</sql>
                     <target_class>InterfaceConnector</target_class>
@@ -185,25 +183,23 @@
                     <extkey_attcode>remote_a_ci_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-                <!--
-                <field id="remote_b_id" xsi:type="AttributeExternalKey">
-                    <sql>remote_b_id</sql>
-                    <target_class>GenericCommLayer1Interface</target_class>
+                <field id="remote_b_interface_id" xsi:type="AttributeExternalKey">
+                    <sql>remote_b_interface_id</sql>
+                    <target_class>PhysicalInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
-                    <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT GenericCommPhysInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
-                    </filter>
+                    <!-- <filter>
+                        <![CDATA[SELECT PatchPanelPort WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                    </filter> -->
                     <dependencies>
                         <attribute id="remote_b_ci_id" />
                         <attribute id="interfaceconnector_b_id" />
                     </dependencies>
                 </field>
-                <field id="remote_b_name" xsi:type="AttributeExternalField">
-                    <extkey_attcode>remote_b_id</extkey_attcode>
+                <field id="remote_b_interface_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>remote_b_interface_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-            -->
                 <field id="length" xsi:type="AttributeDecimal">
                     <sql>length</sql>
                     <default_value />
@@ -252,22 +248,18 @@
                         <item id="remote_a_ci_id">
                             <rank>90</rank>
                         </item>
-                        <!--
-                        <item id="remote_a_id">
+                        <item id="remote_a_interface_id">
                             <rank>100</rank>
                         </item>
-                    -->
                         <item id="interfaceconnector_b_id">
                             <rank>110</rank>
                         </item>
                         <item id="remote_b_ci_id">
                             <rank>120</rank>
                         </item>
-                        <!--
-                        <item id="remote_b_id">
+                        <item id="remote_b_interface_id">
                             <rank>130</rank>
                         </item>
-                    -->
                     </items>
                 </details>
                 <search>
@@ -290,20 +282,15 @@
                         <item id="interfaceconnector_a_id">
                             <rank>60</rank>
                         </item>
-                        <!--
-                        <item id="remote_a_id">
+                        <item id="remote_a_interface_id">
                             <rank>70</rank>
                         </item>
-                    -->
-
                         <item id="interfaceconnector_b_id">
                             <rank>80</rank>
                         </item>
-                        <!--
-                        <item id="remote_b_id">
+                        <item id="remote_b_interface_id">
                             <rank>90</rank>
                         </item>
-                    -->
                     </items>
                 </search>
                 <list>
@@ -323,23 +310,18 @@
                         <item id="straight-crossed">
                             <rank>50</rank>
                         </item>
-
                         <item id="interfaceconnector_a_id">
                             <rank>60</rank>
                         </item>
-                        <!--
-                        <item id="remote_a_id">
+                        <item id="remote_a_interface_id">
                             <rank>70</rank>
                         </item>
-                    -->
                         <item id="interfaceconnector_b_id">
                             <rank>80</rank>
                         </item>
-                        <!--
-                        <item id="remote_b_id">
+                        <item id="remote_b_interface_id">
                             <rank>90</rank>
                         </item>
-                    -->
                     </items>
                 </list>
             </presentation>
@@ -354,16 +336,16 @@
 						{
 							// print "ConnectCable begins<BR>";
 							// End side A
-							if (!(empty($this->Get('remote_a_id'))))
+							if (!(empty($this->Get('remote_a_interface_id'))))
 							{
-								// print "remote_a_name = ".$this->Get('remote_a_name')."<br>";
+								// print "remote_a_interface_name = ".$this->Get('remote_a_interface_name')."<br>";
 								// try to get the port this cable is connected to
-								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->Get('remote_a_id'));
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_a_interface_id'));
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT GenericCommLayer1Interface WHERE id = :device";
-									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_a_id'),));
+									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_a_interface_id'),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
@@ -371,22 +353,22 @@
 										// print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('cable_id', $this->GetKey());
 										// set on each end the opposite end too
-										$oConnection->Set('cable_remote_port_id', $this->Get('remote_b_id'));
+										$oConnection->Set('cable_remote_port_id', $this->Get('remote_b_interface_id'));
 										$oConnection->DBUpdate();
 									}
 								}
 							}
 							// End side B
-							if (!(empty($this->Get('remote_b_id'))))
+							if (!(empty($this->Get('remote_b_interface_id'))))
 							{
-								// print "remote_b_name = ".$this->Get('remote_b_name')."<br>";
+								// print "remote_b_interface_name = ".$this->Get('remote_b_interface_name')."<br>";
 								// try to get the port this cable is connected to
-								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->Get('remote_b_id'));
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_b_interface_id'));
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT GenericCommLayer1Interface WHERE id = :device";
-									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_b_id'),));
+									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_b_interface_id'),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
@@ -394,7 +376,7 @@
 										// print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('cable_id', $this->GetKey());
 										// set on each end the opposite end too
-										$oConnection->Set('cable_remote_port_id', $this->Get('remote_a_id'));
+										$oConnection->Set('cable_remote_port_id', $this->Get('remote_a_interface_id'));
 										$oConnection->DBUpdate();
 									}
 								}
@@ -413,18 +395,18 @@
 						{
 							// print "DisconnectCable begins<BR>";
 							// End side A
-							if (!(empty($this->GetOriginal('remote_a_id'))))
+							if (!(empty($this->GetOriginal('remote_a_interface_id'))))
 							{
-								// print "was connected_to_name = ".$this->GetOriginal('remote_a_name')."<br>";
+								// print "was connected_to_name = ".$this->GetOriginal('remote_a_interface_name')."<br>";
 								// try to get the port this cable was connected to
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->GetOriginal('remote_a_id'), false);
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_a_interface_id'), false);
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT GenericCommLayer1Interface WHERE cable_id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE cable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
@@ -438,18 +420,18 @@
 								}
 							}
 							// End side B
-							if (!(empty($this->GetOriginal('remote_b_id'))))
+							if (!(empty($this->GetOriginal('remote_b_interface_id'))))
 							{
-								// print "was connected_to_name = ".$this->GetOriginal('remote_b_name')."<br>";
+								// print "was connected_to_name = ".$this->GetOriginal('remote_b_interface_name')."<br>";
 								// try to get the port this cable was connected to
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->GetOriginal('remote_b_id'), false);
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_b_interface_id'), false);
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT GenericCommLayer1Interface WHERE cable_id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE cable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
@@ -513,15 +495,10 @@
     </classes>
     <menus>
         <menu id="ConfigManagementOverview" xsi:type="DashboardMenuNode" _delta="must_exist">
-            <rank>1</rank>
-            <parent>ConfigManagement</parent>
             <definition>
-                <layout>DashboardLayoutOneCol</layout>
-                <title />
                 <cells>
                     <cell id="4" _delta="must_exist">
                         <!-- Dashboard -> Miscellaneous -->
-                        <rank>0</rank>
                         <dashlets>
                             <!--
                             <dashlet id="87" xsi:type="DashletBadge" _delta="define">
@@ -547,11 +524,10 @@
                 <cells>
                     <cell id="Network" _delta="must_exist">
                         <dashlets>
-                            <dashlet id="br-001" xsi:type="DashletBadge" delta="define">
+                            <dashlet id="br-pcc" xsi:type="DashletBadge" delta="define">
                                 <rank>6</rank>
                                 <class>PatchCableColor</class>
                             </dashlet>
-
                         </dashlets>
                     </cell>
                 </cells>
