@@ -45,3 +45,11 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:PatchCableColor/Attribute:comment' => 'Comment',
     'Class:PatchCableColor/Attribute:patchcable_list' => 'Patch Cable List',
 ));
+
+//
+// Class: NetworkInterface
+//
+
+Dict::Add('EN US', 'English', 'English', array(
+    'Class:NetworkInterface:patchcable' => 'Patch Cable',
+));

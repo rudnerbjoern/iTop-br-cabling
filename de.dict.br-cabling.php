@@ -45,3 +45,11 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCableColor/Attribute:comment' => 'Anmerkung',
     'Class:PatchCableColor/Attribute:patchcable_list' => 'Patchkabel Liste',
 ));
+
+//
+// Class: NetworkInterface
+//
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+    'Class:NetworkInterface:patchcable' => 'Patchkabel',
+));

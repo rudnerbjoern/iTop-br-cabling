@@ -524,11 +524,21 @@
             <presentation>
                 <details>
                     <items>
-                        <item id="patchcable_id" _delta="define">
-                            <rank>120</rank>
-                        </item>
-                        <item id="patchcable_remote_port_id" _delta="define">
-                            <rank>130</rank>
+                        <item id="col:col2">
+                            <rank>50</rank>
+                            <items>
+                                <item id="fieldset:Class:NetworkInterface:patchcable" _delta="define">
+                                    <rank>20</rank>
+                                    <items>
+                                        <item id="patchcable_id">
+                                            <rank>120</rank>
+                                        </item>
+                                        <item id="patchcable_remote_port_id">
+                                            <rank>130</rank>
+                                        </item>
+                                    </items>
+                                </item>
+                            </items>
                         </item>
                     </items>
                 </details>
