@@ -744,16 +744,6 @@
                     <extkey_attcode>remotebackpanelport_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-                <field id="interfaceconnector_id" xsi:type="AttributeExternalKey">
-                    <sql>interfaceconnector_id</sql>
-                    <target_class>InterfaceConnector</target_class>
-                    <is_null_allowed>false</is_null_allowed>
-                    <on_target_delete>DEL_MANUAL</on_target_delete>
-                </field>
-                <field id="interfaceconnector_name" xsi:type="AttributeExternalField">
-                    <extkey_attcode>interfaceconnector_id</extkey_attcode>
-                    <target_attcode>name</target_attcode>
-                </field>
             </fields>
             <presentation>
                 <details>
@@ -792,7 +782,6 @@
                         <item id="name">
                             <rank>30</rank>
                         </item>
-
                         <item id="interfaceconnector_id">
                             <rank>40</rank>
                         </item>
