@@ -499,6 +499,17 @@
             </methods>
             <relations />
         </class>
+        <class id="ConnectableCI" _delta="must_exits">
+            <relations>
+                <relation id="impacts">
+                    <neighbours>
+                        <neighbour id="physicalinterfaces" _delta="define">
+                            <attribute>physicalinterface_list</attribute>
+                        </neighbour>
+                    </neighbours>
+                </relation>
+            </relations>
+        </class>
         <class id="PhysicalInterface" _delta="must_exist">
             <fields>
                 <field id="patchcable_id" xsi:type="AttributeExternalKey" _delta="define">
@@ -527,7 +538,6 @@
                     <extkey_attcode>patchcable_remote_port_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-
                 <field id="connected_to_device_id" xsi:type="AttributeExternalKey" _delta="define">
                     <sql>connected_to_device_id</sql>
                     <is_null_allowed>true</is_null_allowed>
@@ -569,11 +579,10 @@
                 </field>
             </fields>
             <methods>
-                <method id="ConnectRemotePort">
+                <method id="ConnectRemotePort" _delta="define">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function ConnectRemotePort()
 						{
@@ -609,16 +618,13 @@
 								}
 							}
 							// print "ConnectRemotePort ends<BR>";
-						}
-					]]>
+						}]]>
                     </code>
-                -->
                 </method>
-                <method id="DisconnectRemotePort">
+                <method id="DisconnectRemotePort" _delta="define">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function DisconnectRemotePort()
 						{
@@ -655,50 +661,45 @@
 								}
 							}
 							// print "DisconnectRemotePort ends<BR>";
-						}
-					]]>
+						}]]>
                     </code>
-                -->
                 </method>
-                <method id="AfterInsert">
+                <method id="AfterInsert" _delta="define">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function AfterInsert()
 						{
 							$this->ConnectRemotePort();
 							parent::AfterInsert();
-				}]]>
-                                </code> -->
+				        }]]>
+                    </code>
                 </method>
-                <method id="OnUpdate">
+                <method id="OnUpdate" _delta="define">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function OnUpdate()
 						{
 							$this->DisconnectRemotePort();
 							$this->ConnectRemotePort();
 							parent::OnUpdate();
-				}]]>
-                    </code> -->
+				        }]]>
+                    </code>
                 </method>
-                <method id="OnDelete">
+                <method id="OnDelete" _delta="define">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function OnDelete()
 						{
 							$this->DisconnectRemotePort();
 							parent::OnDelete();
-				}]]>
-                    </code> -->
+			        	}]]>
+                    </code>
                 </method>
             </methods>
             <presentation>
@@ -765,7 +766,6 @@
                 </relation>
             </relations>
         </class>
-
         <class id="PatchPanel" _delta="define">
             <parent>DatacenterDevice</parent>
             <properties>
