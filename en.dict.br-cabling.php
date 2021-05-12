@@ -8,6 +8,10 @@
  * Localized data
  */
 
+//
+// Class: PatchCable
+//
+
 Dict::Add('EN US', 'English', 'English', array(
     // Dictionary entries go here
     'Class:PatchCable' => 'Patch Cable',
@@ -30,4 +34,15 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:PatchCable/Attribute:straight-crossed' => 'Straight or Crossed Cable',
     'Class:PatchCable/Attribute:straight-crossed/Value:straight' => 'Straight',
     'Class:PatchCable/Attribute:straight-crossed/Value:crossed' => 'Crossed',
+));
+
+//
+// Class: PatchCableColor
+//
+
+Dict::Add('EN US', 'English', 'English', array(
+    'Class:PatchCableColor' => 'Patch Cable Color',
+    'Class:PatchCableColor/Attribute:name' => 'Name',
+    'Class:PatchCableColor/Attribute:comment' => 'Comment',
+    'Class:PatchCableColor/Attribute:patchcable_list' => 'Patch Cable List',
 ));

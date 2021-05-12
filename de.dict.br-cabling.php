@@ -8,11 +8,11 @@
  * Localized data
  */
 
+//
+// Class: PatchCable
+//
+
 Dict::Add('DE DE', 'German', 'Deutsch', array(
-    // Dictionary entries go here
-    'Class:PatchCableColor' => 'Patchkabel Farbe',
-    'Class:PatchCableColor/Attribute:name' => 'Farbe',
-    'Class:PatchCableColor/Attribute:comment' => 'Anmerkung',
     'Class:PatchCable' => 'Patchkabel',
     'Class:PatchCable/Attribute:patchcablecolor_id' => 'Patchkabel Farbe',
     'Class:PatchCable/Attribute:interfaceconnector_a_id' => 'Anschluss Seite A',
@@ -33,4 +33,15 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCable/Attribute:straight-crossed' => 'Normal oder gekreuztes Kabel',
     'Class:PatchCable/Attribute:straight-crossed/Value:straight' => 'Normal',
     'Class:PatchCable/Attribute:straight-crossed/Value:crossed' => 'Gekreuzt',
+));
+
+//
+// Class: PatchCableColor
+//
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+    'Class:PatchCableColor' => 'Patchkabel Farbe',
+    'Class:PatchCableColor/Attribute:name' => 'Name',
+    'Class:PatchCableColor/Attribute:comment' => 'Anmerkung',
+    'Class:PatchCableColor/Attribute:patchcable_list' => 'Patchkabel Liste',
 ));
