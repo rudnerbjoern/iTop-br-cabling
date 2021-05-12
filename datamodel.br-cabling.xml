@@ -528,7 +528,7 @@
                     <target_attcode>name</target_attcode>
                 </field>
 
-                <field id="connected_to_device_id" xsi:type="AttributeExternalKey">
+                <field id="connected_to_device_id" xsi:type="AttributeExternalKey" _delta="define">
                     <sql>connected_to_device_id</sql>
                     <is_null_allowed>true</is_null_allowed>
                     <target_class>ConnectableCI</target_class>
@@ -537,11 +537,11 @@
                         <![CDATA[SELECT ConnectableCI WHERE finalclass != 'PatchPanel']]>
                     </filter>
                 </field>
-                <field id="connected_to_device_name" xsi:type="AttributeExternalField">
+                <field id="connected_to_device_name" xsi:type="AttributeExternalField" _delta="define">
                     <extkey_attcode>connected_to_device_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-                <field id="connected_to_interface_id" xsi:type="AttributeExternalKey">
+                <field id="connected_to_interface_id" xsi:type="AttributeExternalKey" _delta="define">
                     <sql>connected_to_interface_id</sql>
                     <target_class>PhysicalInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
@@ -553,7 +553,7 @@
                         <attribute id="connected_to_device_id" />
                     </dependencies>
                 </field>
-                <field id="connected_to_interface_name" xsi:type="AttributeExternalField">
+                <field id="connected_to_interface_name" xsi:type="AttributeExternalField" _delta="define">
                     <extkey_attcode>connected_to_interface_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
@@ -568,8 +568,6 @@
                     <display_style>list</display_style>
                 </field>
             </fields>
-
-
             <methods>
                 <method id="ConnectRemotePort">
                     <static>false</static>
