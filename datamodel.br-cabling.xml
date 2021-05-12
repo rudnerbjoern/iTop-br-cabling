@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2">
+    <!--
+    * @copyright   Copyright (C) 2021 Björn Rudner
+    * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
+    -->
+    <classes>
+        <!-- Patch Cables Colors -->
+        <class id="PatchCableColor" _delta="define">
+            <parent>cmdbAbstractObject</parent>
+            <properties>
+                <category>bizmodel,searchable</category>
+                <abstract>false</abstract>
+                <key_type>autoincrement</key_type>
+                <db_table>patchcablecolor</db_table>
+                <db_key_field>id</db_key_field>
+                <db_final_class_field />
+                <naming>
+                    <attributes>
+                        <attribute id="name" />
+                    </attributes>
+                </naming>
+                <display_template />
+                <icon>images/patchcablecolor.png</icon>
+                <reconciliation>
+                    <attributes>
+                        <attribute id="name" />
+                    </attributes>
+                </reconciliation>
+                <uniqueness_rules>
+                    <rule id="name">
+                        <attributes>
+                            <attribute id="name" />
+                        </attributes>
+                        <filter />
+                        <disabled>false</disabled>
+                        <is_blocking>true</is_blocking>
+                    </rule>
+                </uniqueness_rules>
+            </properties>
+            <fields>
+                <field id="name" xsi:type="AttributeString">
+                    <sql>name</sql>
+                    <default_value />
+                    <is_null_allowed>false</is_null_allowed>
+                </field>
+                <field id="comment" xsi:type="AttributeText">
+                    <sql>comment</sql>
+                    <default_value />
+                    <is_null_allowed>true</is_null_allowed>
+                </field>
+                <field id="patchcable_list" xsi:type="AttributeLinkedSet">
+                    <linked_class>PatchCable</linked_class>
+                    <ext_key_to_me>patchcablecolor_id</ext_key_to_me>
+                    <edit_mode>add_only</edit_mode>
+                    <count_min>0</count_min>
+                    <count_max>0</count_max>
+                    <duplicates />
+                </field>
+            </fields>
+            <methods />
+            <presentation>
+                <details>
+                    <items>
+                        <item id="name">
+                            <rank>10</rank>
+                        </item>
+                        <item id="comment">
+                            <rank>20</rank>
+                        </item>
+                        <item id="patchcable_list">
+                            <rank>30</rank>
+                        </item>
+                    </items>
+                </details>
+                <search>
+                    <items>
+                        <item id="name">
+                            <rank>10</rank>
+                        </item>
+                        <item id="comment">
+                            <rank>20</rank>
+                        </item>
+                    </items>
+                </search>
+                <list>
+                    <items>
+                        <item id="comment">
+                            <rank>20</rank>
+                        </item>
+                    </items>
+                </list>
+            </presentation>
+        </class>
+        <!-- Patch Cables -->
+        <class id="PatchCable" _delta="define">
+            <parent>PhysicalDevice</parent>
+            <properties>
+                <category>bizmodel,searchable</category>
+                <abstract>false</abstract>
+                <key_type>autoincrement</key_type>
+                <db_table>patchcable</db_table>
+                <db_key_field>id</db_key_field>
+                <db_final_class_field />
+                <naming>
+                    <attributes>
+                        <attribute id="name" />
+                    </attributes>
+                </naming>
+                <display_template />
+                <icon>images/patchcable.png</icon>
+                <reconciliation>
+                    <attributes>
+                        <attribute id="name" />
+                        <attribute id="org_id" />
+                        <attribute id="organization_name" />
+                    </attributes>
+                </reconciliation>
+            </properties>
+            <fields>
+                <field id="patchcablecolor_id" xsi:type="AttributeExternalKey">
+                    <sql>patchcablecolor_id</sql>
+                    <target_class>PatchCableColor</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                </field>
+
+                <field id="interfaceconnector_a_id" xsi:type="AttributeExternalKey">
+                    <sql>interfaceconnector_a_id</sql>
+                    <target_class>InterfaceConnector</target_class>
+                    <is_null_allowed>false</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                </field>
+                <field id="interfaceconnector_a_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>interfaceconnector_a_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+
+                <field id="remote_a_ci_id" xsi:type="AttributeExternalKey">
+                    <sql>remote_a_ci_id</sql>
+                    <target_class>ConnectableCI</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_AUTO</on_target_delete>
+                </field>
+                <field id="remote_a_ci_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>remote_a_ci_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <!--
+                <field id="remote_a_id" xsi:type="AttributeExternalKey">
+                    <sql>remote_a_id</sql>
+                    <target_class>GenericCommLayer1Interface</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                    <filter>
+                        <![CDATA[SELECT PatchPanelPort WHERE cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT GenericCommPhysInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                    </filter>
+                    <dependencies>
+                        <attribute id="remote_a_ci_id" />
+                        <attribute id="interfaceconnector_a_id" />
+                    </dependencies>
+                </field>
+                <field id="remote_a_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>remote_a_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+            -->
+                <field id="interfaceconnector_b_id" xsi:type="AttributeExternalKey">
+                    <sql>interfaceconnector_b_id</sql>
+                    <target_class>InterfaceConnector</target_class>
+                    <is_null_allowed>false</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                </field>
+                <field id="interfaceconnector_b_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>interfaceconnector_b_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <field id="remote_b_ci_id" xsi:type="AttributeExternalKey">
+                    <sql>remote_b_ci_id</sql>
+                    <target_class>ConnectableCI</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_AUTO</on_target_delete>
+                </field>
+                <field id="remote_b_ci_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>remote_a_ci_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <!--
+                <field id="remote_b_id" xsi:type="AttributeExternalKey">
+                    <sql>remote_b_id</sql>
+                    <target_class>GenericCommLayer1Interface</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                    <filter>
+                        <![CDATA[SELECT PatchPanelPort WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT GenericCommPhysInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                    </filter>
+                    <dependencies>
+                        <attribute id="remote_b_ci_id" />
+                        <attribute id="interfaceconnector_b_id" />
+                    </dependencies>
+                </field>
+                <field id="remote_b_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>remote_b_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+            -->
+                <field id="length" xsi:type="AttributeDecimal">
+                    <sql>length</sql>
+                    <default_value />
+                    <is_null_allowed>true</is_null_allowed>
+                    <digits>7</digits>
+                    <decimals>2</decimals>
+                </field>
+                <field id="straight-crossed" xsi:type="AttributeEnum">
+                    <values>
+                        <value id="straight">straight</value>
+                        <value id="crossed">crossed</value>
+                    </values>
+                    <sql>straight-crossed</sql>
+                    <default_value>straight</default_value>
+                    <is_null_allowed>true</is_null_allowed>
+                    <display_style> radio_horizontal</display_style>
+                </field>
+            </fields>
+            <presentation>
+                <details>
+                    <items>
+                        <item id="name">
+                            <rank>10</rank>
+                        </item>
+                        <item id="org_id">
+                            <rank>20</rank>
+                        </item>
+                        <item id="location_id">
+                            <rank>30</rank>
+                        </item>
+                        <item id="description">
+                            <rank>40</rank>
+                        </item>
+                        <item id="patchcablecolor_id">
+                            <rank>50</rank>
+                        </item>
+                        <item id="length">
+                            <rank>60</rank>
+                        </item>
+                        <item id="straight-crossed">
+                            <rank>70</rank>
+                        </item>
+                        <item id="interfaceconnector_a_id">
+                            <rank>80</rank>
+                        </item>
+                        <item id="remote_a_ci_id">
+                            <rank>90</rank>
+                        </item>
+                        <!--
+                        <item id="remote_a_id">
+                            <rank>100</rank>
+                        </item>
+                    -->
+                        <item id="interfaceconnector_b_id">
+                            <rank>110</rank>
+                        </item>
+                        <item id="remote_b_ci_id">
+                            <rank>120</rank>
+                        </item>
+                        <!--
+                        <item id="remote_b_id">
+                            <rank>130</rank>
+                        </item>
+                    -->
+                    </items>
+                </details>
+                <search>
+                    <items>
+                        <item id="name">
+                            <rank>10</rank>
+                        </item>
+                        <item id="location_id">
+                            <rank>20</rank>
+                        </item>
+                        <item id="patchcablecolor_id">
+                            <rank>30</rank>
+                        </item>
+                        <item id="length">
+                            <rank>40</rank>
+                        </item>
+                        <item id="straight-crossed">
+                            <rank>50</rank>
+                        </item>
+                        <item id="interfaceconnector_a_id">
+                            <rank>60</rank>
+                        </item>
+                        <!--
+                        <item id="remote_a_id">
+                            <rank>70</rank>
+                        </item>
+                    -->
+
+                        <item id="interfaceconnector_b_id">
+                            <rank>80</rank>
+                        </item>
+                        <!--
+                        <item id="remote_b_id">
+                            <rank>90</rank>
+                        </item>
+                    -->
+                    </items>
+                </search>
+                <list>
+                    <items>
+                        <item id="name">
+                            <rank>10</rank>
+                        </item>
+                        <item id="location_id">
+                            <rank>20</rank>
+                        </item>
+                        <item id="patchcablecolor_id">
+                            <rank>30</rank>
+                        </item>
+                        <item id="length">
+                            <rank>40</rank>
+                        </item>
+                        <item id="straight-crossed">
+                            <rank>50</rank>
+                        </item>
+
+                        <item id="interfaceconnector_a_id">
+                            <rank>60</rank>
+                        </item>
+                        <!--
+                        <item id="remote_a_id">
+                            <rank>70</rank>
+                        </item>
+                    -->
+                        <item id="interfaceconnector_b_id">
+                            <rank>80</rank>
+                        </item>
+                        <!--
+                        <item id="remote_b_id">
+                            <rank>90</rank>
+                        </item>
+                    -->
+                    </items>
+                </list>
+            </presentation>
+            <methods>
+                <!--
+                <method id="ConnectCable">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-cmdbAbstractObject</type>
+                    <code>
+                        <![CDATA[ protected function ConnectCable()
+						{
+							// print "ConnectCable begins<BR>";
+							// End side A
+							if (!(empty($this->Get('remote_a_id'))))
+							{
+								// print "remote_a_name = ".$this->Get('remote_a_name')."<br>";
+								// try to get the port this cable is connected to
+								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->Get('remote_a_id'));
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								{
+									// print "Test Object OK<br>";
+									$sOQL = "SELECT GenericCommLayer1Interface WHERE id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_a_id'),));
+
+									// There should be one link - do it in a safe manner anyway
+									while ($oConnection = $oConnectionSet->Fetch())
+									{
+										// print "Updating : '".$oConnection->Get('name')."'<br>";
+										$oConnection->Set('cable_id', $this->GetKey());
+										// set on each end the opposite end too
+										$oConnection->Set('cable_remote_port_id', $this->Get('remote_b_id'));
+										$oConnection->DBUpdate();
+									}
+								}
+							}
+							// End side B
+							if (!(empty($this->Get('remote_b_id'))))
+							{
+								// print "remote_b_name = ".$this->Get('remote_b_name')."<br>";
+								// try to get the port this cable is connected to
+								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->Get('remote_b_id'));
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								{
+									// print "Test Object OK<br>";
+									$sOQL = "SELECT GenericCommLayer1Interface WHERE id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_b_id'),));
+
+									// There should be one link - do it in a safe manner anyway
+									while ($oConnection = $oConnectionSet->Fetch())
+									{
+										// print "Updating : '".$oConnection->Get('name')."'<br>";
+										$oConnection->Set('cable_id', $this->GetKey());
+										// set on each end the opposite end too
+										$oConnection->Set('cable_remote_port_id', $this->Get('remote_a_id'));
+										$oConnection->DBUpdate();
+									}
+								}
+							}
+							// print "ConnectCable ends<BR>";
+						}
+					]]>
+                    </code>
+                </method>
+                <method id="DisconnectCable">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-cmdbAbstractObject</type>
+                    <code>
+                        <![CDATA[ protected function DisconnectCable()
+						{
+							// print "DisconnectCable begins<BR>";
+							// End side A
+							if (!(empty($this->GetOriginal('remote_a_id'))))
+							{
+								// print "was connected_to_name = ".$this->GetOriginal('remote_a_name')."<br>";
+								// try to get the port this cable was connected to
+								// This one was hard to find : adding false in the next request allow a null answer
+								// witch is OK as we have to test after operations anyway
+								// see also $$mustBeFound value for MetaModel::GetObject
+								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->GetOriginal('remote_a_id'), false);
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								{
+									// print "Test Object OK<br>";
+									$sOQL = "SELECT GenericCommLayer1Interface WHERE cable_id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
+
+									// There should be one link - do it in a safe manner anyway
+									while ($oConnection = $oConnectionSet->Fetch())
+									{
+										// print "Updating : '".$oConnection->Get('name')."'<br>";
+										$oConnection->Set('cable_id', '');
+										$oConnection->Set('cable_remote_port_id', '');
+										$oConnection->DBUpdate();
+									}
+								}
+							}
+							// End side B
+							if (!(empty($this->GetOriginal('remote_b_id'))))
+							{
+								// print "was connected_to_name = ".$this->GetOriginal('remote_b_name')."<br>";
+								// try to get the port this cable was connected to
+								// This one was hard to find : adding false in the next request allow a null answer
+								// witch is OK as we have to test after operations anyway
+								// see also $$mustBeFound value for MetaModel::GetObject
+								$oDevice = MetaModel::GetObject('GenericCommLayer1Interface', $this->GetOriginal('remote_b_id'), false);
+								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'GenericCommPhysInterface'))
+								{
+									// print "Test Object OK<br>";
+									$sOQL = "SELECT GenericCommLayer1Interface WHERE cable_id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
+
+									// There should be one link - do it in a safe manner anyway
+									while ($oConnection = $oConnectionSet->Fetch())
+									{
+										// print "Updating : '".$oConnection->Get('name')."'<br>";
+										$oConnection->Set('cable_id', '');
+										$oConnection->Set('cable_remote_port_id', '');
+										$oConnection->DBUpdate();
+									}
+								}
+							}
+							// print "DisconnectCable ends<BR>";
+						}
+					]]>
+                    </code>
+                </method>
+            -->
+                <!--
+                <method id="AfterInsert">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[	protected function AfterInsert()
+						{
+							$this->ConnectCable();
+							parent::AfterInsert();
+				}]]>
+                    </code>
+                </method>
+                <method id="OnUpdate">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[	protected function OnUpdate()
+						{
+							$this->DisconnectCable();
+							$this->ConnectCable();
+							parent::OnUpdate();
+				}]]>
+                    </code>
+                </method>
+                <method id="OnDelete">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[	protected function OnDelete()
+						{
+							$this->DisconnectCable();
+							parent::OnDelete();
+				}]]>
+                    </code>
+                </method>
+            -->
+            </methods>
+            <relations />
+        </class>
+    </classes>
+    <menus>
+        <menu id="ConfigManagementOverview" xsi:type="DashboardMenuNode" _delta="must_exist">
+            <rank>1</rank>
+            <parent>ConfigManagement</parent>
+            <definition>
+                <layout>DashboardLayoutOneCol</layout>
+                <title />
+                <cells>
+                    <cell id="4" _delta="must_exist">
+                        <!-- Dashboard -> Miscellaneous -->
+                        <rank>0</rank>
+                        <dashlets>
+                            <!--
+                            <dashlet id="87" xsi:type="DashletBadge" _delta="define">
+                                <rank>14</rank>
+                                <class>PatchPanel</class>
+                            </dashlet>
+                            <dashlet id="88" xsi:type="DashletBadge" _delta="define">
+                                <rank>15</rank>
+                                <class>PatchPanelPort</class>
+                            </dashlet>
+                        -->
+                            <dashlet id="99" xsi:type="DashletBadge" _delta="define">
+                                <rank>8</rank>
+                                <class>PatchCable</class>
+                            </dashlet>
+                        </dashlets>
+                    </cell>
+                </cells>
+            </definition>
+        </menu>
+        <menu id="Typology" xsi:type="DashboardMenuNode" _delta="must_exist">
+            <definition>
+                <cells>
+                    <cell id="Network" _delta="must_exist">
+                        <dashlets>
+                            <dashlet id="br-001" xsi:type="DashletBadge" delta="define">
+                                <rank>6</rank>
+                                <class>PatchCableColor</class>
+                            </dashlet>
+
+                        </dashlets>
+                    </cell>
+                </cells>
+            </definition>
+        </menu>
+    </menus>
+</itop_design>
