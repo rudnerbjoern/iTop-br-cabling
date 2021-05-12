@@ -527,21 +527,210 @@
                     <extkey_attcode>patchcable_remote_port_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
+
+                <field id="connected_to_device_id" xsi:type="AttributeExternalKey">
+                    <sql>connected_to_device_id</sql>
+                    <is_null_allowed>true</is_null_allowed>
+                    <target_class>ConnectableCI</target_class>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                    <filter>
+                        <![CDATA[SELECT ConnectableCI WHERE finalclass != 'PatchPanel']]>
+                    </filter>
+                </field>
+                <field id="connected_to_device_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>connected_to_device_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <field id="connected_to_interface_id" xsi:type="AttributeExternalKey">
+                    <sql>connected_to_interface_id</sql>
+                    <target_class>PhysicalInterface</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                    <filter>
+                        <![CDATA[SELECT PhysicalInterface AS G WHERE G.connected_to_interface_id = '' AND G.id != :this->id AND G.connectableci_id = :this->connected_to_device_id]]>
+                    </filter>
+                    <dependencies>
+                        <attribute id="connected_to_device_id" />
+                    </dependencies>
+                </field>
+                <field id="connected_to_interface_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>connected_to_interface_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <field id="connection_impact" xsi:type="AttributeEnum" _delta="define">
+                    <values>
+                        <value id="impacts">impacts</value>
+                        <value id="depends">depends</value>
+                    </values>
+                    <sql>impact</sql>
+                    <default_value>depends</default_value>
+                    <is_null_allowed>true</is_null_allowed>
+                    <display_style>list</display_style>
+                </field>
             </fields>
+
+
+            <methods>
+                <method id="ConnectRemotePort">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-cmdbAbstractObject</type>
+                    <!--
+                    <code>
+                        <![CDATA[ protected function ConnectRemotePort()
+						{
+							// print "ConnectRemotePort begins<BR>";
+							if (!(empty($this->Get('connected_to_interface_id'))))
+							{
+								// print "connected_to_name = ".$this->Get('connected_to_name')."<br>";
+								// try to get the port this port is connected to
+								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->Get('connected_to_interface_id'));
+								if (is_object($oDevice) && (get_class($oDevice) == 'PhysicalInterface'))
+								{
+									// print "Test Object OK<br>";
+									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL),
+										array(),
+										array(
+											'device' => $this->Get('connected_to_interface_id'),
+										)
+									);
+
+									// There should be one link - do it in a safe manner anyway
+									while ($oConnection = $oConnectionSet->Fetch())
+									{
+										// print "En cours sur : '".$oConnection->Get('name')."'<br>";
+										// if this port connection_impact is 'depends' then the other side is 'impacts'
+										$sImpact = $this->Get('connection_impact');
+										$sConnImpact = ($sImpact == 'impacts') ? 'depends' : 'impacts';
+										$oConnection->Set('connected_to_interface_id', $this->GetKey());
+										$oConnection->Set('connected_to_device_id', $this->Get('connectableci_id'));
+										$oConnection->Set('connection_impact', $sConnImpact);
+										$oConnection->DBUpdate();
+									}
+								}
+							}
+							// print "ConnectRemotePort ends<BR>";
+						}
+					]]>
+                    </code>
+                -->
+                </method>
+                <method id="DisconnectRemotePort">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-cmdbAbstractObject</type>
+                    <!--
+                    <code>
+                        <![CDATA[ protected function DisconnectRemotePort()
+						{
+							// print "DisconnectRemotePort begins<BR>";
+							if (!(empty($this->GetOriginal('connected_to_interface_id'))))
+							{
+								// print "was connected_to_name = ".$this->GetOriginal('connected_to_name')."<br>";
+								// try to get the port this port was connected to
+								// This one was hard to find : adding false in the next request allow a null answer
+								// witch is OK as we have to test after operations anyway
+								// see also $$mustBeFound value for MetaModel::GetObject
+								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('connected_to_interface_id'), false);
+								if (is_object($oDevice) && (get_class($oDevice) == 'PhysicalInterface'))
+								{
+									// print "Test Object OK<br>";
+									$sOQL = "SELECT PhysicalInterface WHERE connected_to_interface_id = :device";
+									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL),
+										array(),
+										array(
+											'device' => $this->GetKey(),
+										)
+									);
+
+									// There should be one link - do it in a safe manner anyway
+									while ($oConnection = $oConnectionSet->Fetch())
+									{
+										// print "En cours sur : '".$oConnection->Get('name')."'<br>";
+										// connection_impact is by default 'depends'
+										$oConnection->Set('connected_to_interface_id', '');
+										$oConnection->Set('connected_to_device_id', '');
+										$oConnection->Set('connection_impact', 'depends');
+										$oConnection->DBUpdate();
+									}
+								}
+							}
+							// print "DisconnectRemotePort ends<BR>";
+						}
+					]]>
+                    </code>
+                -->
+                </method>
+                <method id="AfterInsert">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <!--
+                    <code>
+                        <![CDATA[ protected function AfterInsert()
+						{
+							$this->ConnectRemotePort();
+							parent::AfterInsert();
+				}]]>
+                                </code> -->
+                </method>
+                <method id="OnUpdate">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <!--
+                    <code>
+                        <![CDATA[ protected function OnUpdate()
+						{
+							$this->DisconnectRemotePort();
+							$this->ConnectRemotePort();
+							parent::OnUpdate();
+				}]]>
+                    </code> -->
+                </method>
+                <method id="OnDelete">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <!--
+                    <code>
+                        <![CDATA[ protected function OnDelete()
+						{
+							$this->DisconnectRemotePort();
+							parent::OnDelete();
+				}]]>
+                    </code> -->
+                </method>
+            </methods>
             <presentation>
                 <details>
                     <items>
                         <item id="col:col2">
                             <rank>50</rank>
                             <items>
-                                <item id="fieldset:Class:PhysicalInterface:patchcable" _delta="define">
+                                <item id="fieldset:Class:PhysicalInterface:connectedto" _delta="define">
                                     <rank>20</rank>
                                     <items>
+                                        <item id="connected_to_device_id">
+                                            <rank>10</rank>
+                                        </item>
+                                        <item id="connected_to_interface_id">
+                                            <rank>20</rank>
+                                        </item>
+                                        <item id="connection_impact">
+                                            <rank>30</rank>
+                                        </item>
+                                    </items>
+                                </item>
+                                <item id="fieldset:Class:PhysicalInterface:patchcable" _delta="define">
+                                    <rank>30</rank>
+                                    <items>
                                         <item id="patchcable_id">
-                                            <rank>120</rank>
+                                            <rank>10</rank>
                                         </item>
                                         <item id="patchcable_remote_port_id">
-                                            <rank>130</rank>
+                                            <rank>20</rank>
                                         </item>
                                     </items>
                                 </item>
@@ -567,6 +756,16 @@
                     </items>
                 </search>
             </presentation>
+            <relations>
+                <relation id="impacts">
+                    <neighbours>
+                        <neighbour id="physicalinterface">
+                            <query_down>SELECT PhysicalInterface WHERE connected_to_interface_id = :this-&gt;id AND connection_impact = 'depends'</query_down>
+                            <query_up>SELECT PhysicalInterface WHERE connected_to_interface_id = :this-&gt;id AND connection_impact = 'impacts'</query_up>
+                        </neighbour>
+                    </neighbours>
+                </relation>
+            </relations>
         </class>
 
         <class id="PatchPanel" _delta="define">
