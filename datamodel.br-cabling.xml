@@ -336,7 +336,6 @@
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function ConnectCable()
 						{
@@ -388,16 +387,13 @@
 								}
 							}
 							// print "ConnectCable ends<BR>";
-						}
-					]]>
+						}]]>
                     </code>
-                -->
                 </method>
                 <method id="DisconnectCable">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function DisconnectCable()
 						{
@@ -453,54 +449,45 @@
 								}
 							}
 							// print "DisconnectCable ends<BR>";
-						}
-					]]>
+						}]]>
                     </code>
-                -->
                 </method>
-
                 <method id="AfterInsert">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
-                        <![CDATA[	protected function AfterInsert()
+                        <![CDATA[ protected function AfterInsert()
 						{
 							$this->ConnectCable();
 							parent::AfterInsert();
-				}]]>
+			        	}]]>
                     </code>
-                -->
                 </method>
                 <method id="OnUpdate">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
-                        <![CDATA[	protected function OnUpdate()
+                        <![CDATA[ protected function OnUpdate()
 						{
 							$this->DisconnectCable();
 							$this->ConnectCable();
 							parent::OnUpdate();
-				}]]>
+				        }]]>
                     </code>
-                -->
                 </method>
                 <method id="OnDelete">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
-                        <![CDATA[	protected function OnDelete()
+                        <![CDATA[ protected function OnDelete()
 						{
 							$this->DisconnectCable();
 							parent::OnDelete();
-				}]]>
+				        }]]>
                     </code>
-                -->
                 </method>
             </methods>
             <relations />
