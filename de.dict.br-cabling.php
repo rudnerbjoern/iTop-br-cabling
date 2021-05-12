@@ -47,9 +47,13 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 ));
 
 //
-// Class: NetworkInterface
+// Class: PhysicalInterface
 //
 
 Dict::Add('DE DE', 'German', 'Deutsch', array(
-    'Class:NetworkInterface:patchcable' => 'Patchkabel',
+    'Class:PhysicalInterface:patchcable' => 'Patchkabel',
+    'Class:PhysicalInterface/Attribute:patchcable_id' => 'Patchkabel id',
+    'Class:PhysicalInterface/Attribute:patchcable_name' => 'Patchkabel Name',
+    'Class:PhysicalInterface/Attribute:patchcable_remote_port_id' => 'Patchkabel Remote Port',
+    'Class:PhysicalInterface/Attribute:patchcable_remote_port_name' => 'Patchkabel Remote Port Name',
 ));
