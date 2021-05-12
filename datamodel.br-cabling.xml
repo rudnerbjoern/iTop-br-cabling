@@ -152,8 +152,11 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <!-- <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
                     </filter> -->
+                    <filter>
+                        <![CDATA[SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                    </filter>
                     <dependencies>
                         <attribute id="remote_a_ci_id" />
                         <attribute id="interfaceconnector_a_id" />
@@ -189,8 +192,11 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <!-- <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  cable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
                     </filter> -->
+                    <filter>
+                        <![CDATA[SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                    </filter>
                     <dependencies>
                         <attribute id="remote_b_ci_id" />
                         <attribute id="interfaceconnector_b_id" />
@@ -326,11 +332,11 @@
                 </list>
             </presentation>
             <methods>
-                <!--
                 <method id="ConnectCable">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
+                    <!--
                     <code>
                         <![CDATA[ protected function ConnectCable()
 						{
@@ -351,9 +357,9 @@
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
 										// print "Updating : '".$oConnection->Get('name')."'<br>";
-										$oConnection->Set('cable_id', $this->GetKey());
+										$oConnection->Set('patchcable_id', $this->GetKey());
 										// set on each end the opposite end too
-										$oConnection->Set('cable_remote_port_id', $this->Get('remote_b_interface_id'));
+										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_b_interface_id'));
 										$oConnection->DBUpdate();
 									}
 								}
@@ -374,9 +380,9 @@
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
 										// print "Updating : '".$oConnection->Get('name')."'<br>";
-										$oConnection->Set('cable_id', $this->GetKey());
+										$oConnection->Set('patchcable_id', $this->GetKey());
 										// set on each end the opposite end too
-										$oConnection->Set('cable_remote_port_id', $this->Get('remote_a_interface_id'));
+										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_a_interface_id'));
 										$oConnection->DBUpdate();
 									}
 								}
@@ -385,11 +391,13 @@
 						}
 					]]>
                     </code>
+                -->
                 </method>
                 <method id="DisconnectCable">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
+                    <!--
                     <code>
                         <![CDATA[ protected function DisconnectCable()
 						{
@@ -406,15 +414,15 @@
 								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT PhysicalInterface WHERE cable_id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
 										// print "Updating : '".$oConnection->Get('name')."'<br>";
-										$oConnection->Set('cable_id', '');
-										$oConnection->Set('cable_remote_port_id', '');
+										$oConnection->Set('patchcable_id', '');
+										$oConnection->Set('patchcable_remote_port_id', '');
 										$oConnection->DBUpdate();
 									}
 								}
@@ -431,15 +439,15 @@
 								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT PhysicalInterface WHERE cable_id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
 										// print "Updating : '".$oConnection->Get('name')."'<br>";
-										$oConnection->Set('cable_id', '');
-										$oConnection->Set('cable_remote_port_id', '');
+										$oConnection->Set('patchcable_id', '');
+										$oConnection->Set('patchcable_remote_port_id', '');
 										$oConnection->DBUpdate();
 									}
 								}
@@ -448,13 +456,14 @@
 						}
 					]]>
                     </code>
+                -->
                 </method>
-            -->
-                <!--
+
                 <method id="AfterInsert">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
+                    <!--
                     <code>
                         <![CDATA[	protected function AfterInsert()
 						{
@@ -462,11 +471,13 @@
 							parent::AfterInsert();
 				}]]>
                     </code>
+                -->
                 </method>
                 <method id="OnUpdate">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
+                    <!--
                     <code>
                         <![CDATA[	protected function OnUpdate()
 						{
@@ -475,11 +486,13 @@
 							parent::OnUpdate();
 				}]]>
                     </code>
+                -->
                 </method>
                 <method id="OnDelete">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
+                    <!--
                     <code>
                         <![CDATA[	protected function OnDelete()
 						{
@@ -487,10 +500,69 @@
 							parent::OnDelete();
 				}]]>
                     </code>
+                -->
                 </method>
-            -->
             </methods>
             <relations />
+        </class>
+        <class id="PhysicalInterface" _delta="must_exist">
+            <fields>
+                <field id="patchcable_id" xsi:type="AttributeExternalKey" _delta="define">
+                    <sql>patchcable_id</sql>
+                    <target_class>PatchCable</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                    <filter>
+                        <![CDATA[SELECT PatchCable WHERE (remote_a_interface_id = '' AND interfaceconnector_a_id = :this->interfaceconnector_id) OR (remote_b_interface_id = '' AND interfaceconnector_b_id = :this->interfaceconnector_id)]]>
+                    </filter>
+                    <dependencies />
+                </field>
+                <field id="patchcable_name" xsi:type="AttributeExternalField" _delta="define">
+                    <extkey_attcode>patchcable_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <field id="patchcable_remote_port_id" xsi:type="AttributeExternalKey" _delta="define">
+                    <sql>patchcable_remote_port_id</sql>
+                    <target_class>PhysicalInterface</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                    <filter />
+                    <dependencies />
+                </field>
+                <field id="patchcable_remote_port_name" xsi:type="AttributeExternalField" _delta="define">
+                    <extkey_attcode>patchcable_remote_port_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+            </fields>
+            <presentation>
+                <details>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                        <item id="patchcable_remote_port_id" _delta="define">
+                            <rank>130</rank>
+                        </item>
+                    </items>
+                </details>
+                <list>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                        <item id="patchcable_remote_port_id" _delta="define">
+                            <rank>130</rank>
+                        </item>
+                    </items>
+                </list>
+                <search>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                    </items>
+                </search>
+            </presentation>
         </class>
     </classes>
     <menus>
