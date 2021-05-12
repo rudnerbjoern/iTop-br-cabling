@@ -499,7 +499,7 @@
             </methods>
             <relations />
         </class>
-        <class id="ConnectableCI" _delta="must_exits">
+        <class id="ConnectableCI" _delta="must_exist">
             <relations>
                 <relation id="impacts">
                     <neighbours>
