@@ -511,6 +511,7 @@
             </methods>
             <relations />
         </class>
+        <!-- this needs more testing 
         <class id="ConnectableCI" _delta="must_exist">
             <relations>
                 <relation id="impacts">
@@ -522,6 +523,7 @@
                 </relation>
             </relations>
         </class>
+    -->
         <class id="PhysicalInterface" _delta="must_exist">
             <fields>
                 <field id="patchcable_id" xsi:type="AttributeExternalKey" _delta="define">
@@ -550,6 +552,7 @@
                     <extkey_attcode>patchcable_remote_port_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
+                <!-- this needs more testing 
                 <field id="connected_to_device_id" xsi:type="AttributeExternalKey" _delta="define">
                     <sql>connected_to_device_id</sql>
                     <is_null_allowed>true</is_null_allowed>
@@ -589,7 +592,9 @@
                     <is_null_allowed>true</is_null_allowed>
                     <display_style>list</display_style>
                 </field>
+            -->
             </fields>
+            <!-- this needs more testing 
             <methods>
                 <method id="ConnectRemotePort" _delta="define">
                     <static>false</static>
@@ -714,12 +719,14 @@
                     </code>
                 </method>
             </methods>
+        -->
             <presentation>
                 <details>
                     <items>
                         <item id="col:col2">
                             <rank>50</rank>
                             <items>
+                                <!-- this needs more testing 
                                 <item id="fieldset:Class:PhysicalInterface:connectedto" _delta="define">
                                     <rank>20</rank>
                                     <items>
@@ -734,6 +741,7 @@
                                         </item>
                                     </items>
                                 </item>
+                            -->
                                 <item id="fieldset:Class:PhysicalInterface:patchcable" _delta="define">
                                     <rank>30</rank>
                                     <items>
@@ -768,6 +776,7 @@
                 </search>
             </presentation>
             <relations>
+                <!-- this needs more testing 
                 <relation id="impacts">
                     <neighbours>
                         <neighbour id="physicalinterface" _delta="define">
@@ -776,6 +785,7 @@
                         </neighbour>
                     </neighbours>
                 </relation>
+            -->
             </relations>
         </class>
         <class id="PatchPanel" _delta="define">
