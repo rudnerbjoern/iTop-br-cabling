@@ -757,7 +757,7 @@
             <relations>
                 <relation id="impacts">
                     <neighbours>
-                        <neighbour id="physicalinterface">
+                        <neighbour id="physicalinterface" _delta="define">
                             <query_down>SELECT PhysicalInterface WHERE connected_to_interface_id = :this-&gt;id AND connection_impact = 'depends'</query_down>
                             <query_up>SELECT PhysicalInterface WHERE connected_to_interface_id = :this-&gt;id AND connection_impact = 'impacts'</query_up>
                         </neighbour>
