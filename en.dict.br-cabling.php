@@ -33,6 +33,8 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:PatchCable/Attribute:straight-crossed' => 'Straight or Crossed Cable',
     'Class:PatchCable/Attribute:straight-crossed/Value:straight' => 'Straight',
     'Class:PatchCable/Attribute:straight-crossed/Value:crossed' => 'Crossed',
+    'Class:PatchCable:sidea' => 'Side \'A\'',
+    'Class:PatchCable:sideb' => 'Side \'B\'',
 ));
 
 //

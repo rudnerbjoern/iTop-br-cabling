@@ -149,11 +149,8 @@
                     <target_class>PhysicalInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
-                    <!-- <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
-                    </filter> -->
                     <filter>
-                        <![CDATA[SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_a_ci_id" />
@@ -189,11 +186,8 @@
                     <target_class>PhysicalInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
-                    <!-- <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
-                    </filter> -->
                     <filter>
-                        <![CDATA[SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_b_ci_id" />
@@ -225,44 +219,59 @@
             <presentation>
                 <details>
                     <items>
-                        <item id="name">
+                        <item id="fieldset:Class:NetworkInterface:baseinfo">
                             <rank>10</rank>
+                            <items>
+                                <item id="name">
+                                    <rank>10</rank>
+                                </item>
+                                <item id="org_id">
+                                    <rank>20</rank>
+                                </item>
+                                <item id="location_id">
+                                    <rank>30</rank>
+                                </item>
+                                <item id="description">
+                                    <rank>40</rank>
+                                </item>
+                                <item id="patchcablecolor_id">
+                                    <rank>50</rank>
+                                </item>
+                                <item id="length">
+                                    <rank>60</rank>
+                                </item>
+                                <item id="straight-crossed">
+                                    <rank>70</rank>
+                                </item>
+                            </items>
                         </item>
-                        <item id="org_id">
+                        <item id="fieldset:Class:PatchCable:sidea">
                             <rank>20</rank>
+                            <items>
+                                <item id="interfaceconnector_a_id">
+                                    <rank>80</rank>
+                                </item>
+                                <item id="remote_a_ci_id">
+                                    <rank>90</rank>
+                                </item>
+                                <item id="remote_a_interface_id">
+                                    <rank>100</rank>
+                                </item>
+                            </items>
                         </item>
-                        <item id="location_id">
+                        <item id="fieldset:Class:PatchCable:sideb">
                             <rank>30</rank>
-                        </item>
-                        <item id="description">
-                            <rank>40</rank>
-                        </item>
-                        <item id="patchcablecolor_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="length">
-                            <rank>60</rank>
-                        </item>
-                        <item id="straight-crossed">
-                            <rank>70</rank>
-                        </item>
-                        <item id="interfaceconnector_a_id">
-                            <rank>80</rank>
-                        </item>
-                        <item id="remote_a_ci_id">
-                            <rank>90</rank>
-                        </item>
-                        <item id="remote_a_interface_id">
-                            <rank>100</rank>
-                        </item>
-                        <item id="interfaceconnector_b_id">
-                            <rank>110</rank>
-                        </item>
-                        <item id="remote_b_ci_id">
-                            <rank>120</rank>
-                        </item>
-                        <item id="remote_b_interface_id">
-                            <rank>130</rank>
+                            <items>
+                                <item id="interfaceconnector_b_id">
+                                    <rank>110</rank>
+                                </item>
+                                <item id="remote_b_ci_id">
+                                    <rank>120</rank>
+                                </item>
+                                <item id="remote_b_interface_id">
+                                    <rank>130</rank>
+                                </item>
+                            </items>
                         </item>
                     </items>
                 </details>
@@ -612,35 +621,40 @@
                         <item id="services_list">
                             <rank>160</rank>
                         </item>
-                        <item id="name">
+                        <item id="fieldset:Class:NetworkInterface:baseinfo">
                             <rank>10</rank>
-                        </item>
-                        <item id="org_id">
-                            <rank>20</rank>
-                        </item>
-                        <item id="status">
-                            <rank>30</rank>
-                        </item>
-                        <item id="business_criticity">
-                            <rank>40</rank>
-                        </item>
-                        <item id="location_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="rack_id">
-                            <rank>60</rank>
-                        </item>
-                        <item id="nb_u">
-                            <rank>80</rank>
-                        </item>
-                        <item id="brand_id">
-                            <rank>90</rank>
-                        </item>
-                        <item id="model_id">
-                            <rank>100</rank>
-                        </item>
-                        <item id="description">
-                            <rank>110</rank>
+                            <items>
+                                <item id="name">
+                                    <rank>10</rank>
+                                </item>
+                                <item id="org_id">
+                                    <rank>20</rank>
+                                </item>
+                                <item id="status">
+                                    <rank>30</rank>
+                                </item>
+                                <item id="business_criticity">
+                                    <rank>40</rank>
+                                </item>
+                                <item id="location_id">
+                                    <rank>50</rank>
+                                </item>
+                                <item id="rack_id">
+                                    <rank>60</rank>
+                                </item>
+                                <item id="nb_u">
+                                    <rank>80</rank>
+                                </item>
+                                <item id="brand_id">
+                                    <rank>90</rank>
+                                </item>
+                                <item id="model_id">
+                                    <rank>100</rank>
+                                </item>
+                                <item id="description">
+                                    <rank>110</rank>
+                                </item>
+                            </items>
                         </item>
                     </items>
                 </details>
@@ -701,8 +715,6 @@
             <methods />
             <relations />
         </class>
-
-
         <class id="PatchPanelPort" _delta="define">
             <parent>PhysicalInterface</parent>
             <properties>
@@ -748,26 +760,36 @@
             <presentation>
                 <details>
                     <items>
-                        <item id="name">
+                        <item id="fieldset:Class:NetworkInterface:baseinfo">
                             <rank>10</rank>
+                            <items>
+                                <item id="name">
+                                    <rank>10</rank>
+                                </item>
+                                <item id="comment">
+                                    <rank>20</rank>
+                                </item>
+                                <item id="connectableci_id">
+                                    <rank>30</rank>
+                                </item>
+                                <item id="interfaceconnector_id">
+                                    <rank>40</rank>
+                                </item>
+                                <item id="remotebackpanelport_id">
+                                    <rank>50</rank>
+                                </item>
+                            </items>
                         </item>
-                        <item id="comment">
+                        <item id="fieldset:Class:PhysicalInterface:patchcable">
                             <rank>20</rank>
-                        </item>
-                        <item id="connectableci_id">
-                            <rank>30</rank>
-                        </item>
-                        <item id="interfaceconnector_id">
-                            <rank>40</rank>
-                        </item>
-                        <item id="remotebackpanelport_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="patchcable_id">
-                            <rank>60</rank>
-                        </item>
-                        <item id="patchcable_remote_port_id" _delta="define">
-                            <rank>70</rank>
+                            <items>
+                                <item id="patchcable_id">
+                                    <rank>60</rank>
+                                </item>
+                                <item id="patchcable_remote_port_id">
+                                    <rank>70</rank>
+                                </item>
+                            </items>
                         </item>
                     </items>
                 </details>
