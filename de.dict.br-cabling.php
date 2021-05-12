@@ -57,3 +57,26 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PhysicalInterface/Attribute:patchcable_remote_port_id' => 'Patchkabel Remote Port',
     'Class:PhysicalInterface/Attribute:patchcable_remote_port_name' => 'Patchkabel Remote Port Name',
 ));
+
+//
+// Class: PatchPanel
+//
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+    'Class:PatchPanel' => 'Patchpanel',
+    'Class:PatchPanel+' => '',
+    'Class:PatchPanel/Attribute:patchpanelport_list' => 'Ports',
+    'Class:PatchPanel/Attribute:patchpanelport_list+' => '',
+));
+
+//
+// Class: PatchPanelPort
+//
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+    'Class:PatchPanelPort' => 'Patchpanel Port',
+    'Class:PatchPanelPort/Attribute:connectableci_id' => 'Patchpanel zu diesem Port',
+    'Class:PatchPanelPort/Attribute:connectableci_name' => 'Patchpanels zu diesem Port Name',
+    'Class:PatchPanelPort/Attribute:remotebackpanelport_id' => 'Verbidnung zu anderem Patchpanel Port',
+    'Class:PatchPanelPort/Attribute:remotebackpanelport_name' => 'Verbidnung zu anderem Patchpanel Port Name',
+));

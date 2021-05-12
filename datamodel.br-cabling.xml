@@ -827,7 +827,6 @@
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function ConnectBackPanelRemotePort()
 						{
@@ -854,16 +853,13 @@
 								}
 							}
 							// print "ConnectBackPanelRemotePort ends<BR>";
-						}
-					]]>
+						}]]>
                     </code>
-                -->
                 </method>
                 <method id="DisconnectBackPanelRemotePort">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-cmdbAbstractObject</type>
-                    <!--
                     <code>
                         <![CDATA[ protected function DisconnectBackPanelRemotePort()
 						{
@@ -893,53 +889,45 @@
 								}
 							}
 							// print "DisconnectBackPanelRemotePort ends<BR>";
-						}
-					]]>
+						}]]>
                     </code>
-                -->
                 </method>
                 <method id="AfterInsert">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
                         <![CDATA[	protected function AfterInsert()
 						{
 							$this->ConnectBackPanelRemotePort();
 							parent::AfterInsert();
-				}]]>
+				        }]]>
                     </code>
-                -->
                 </method>
                 <method id="OnUpdate">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
                         <![CDATA[	protected function OnUpdate()
 						{
 							$this->DisconnectBackPanelRemotePort();
 							$this->ConnectBackPanelRemotePort();
 							parent::OnUpdate();
-				}]]>
+				        }]]>
                     </code>
-                -->
                 </method>
                 <method id="OnDelete">
                     <static>false</static>
                     <access>protected</access>
                     <type>Overload-DBObject</type>
-                    <!--
                     <code>
                         <![CDATA[	protected function OnDelete()
 						{
 							$this->DisconnectBackPanelRemotePort();
 							parent::OnDelete();
-				}]]>
+				        }]]>
                     </code>
-                -->
                 </method>
             </methods>
             <relations />
