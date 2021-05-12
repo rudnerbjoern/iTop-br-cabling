@@ -219,14 +219,8 @@
             <relations>
                 <relation id="impacts">
                     <neighbours>
-                        <neighbour id="remote_a_ci">
-                            <attribute>remote_a_ci_id</attribute>
-                        </neighbour>
                         <neighbour id="remote_a_interface">
                             <attribute>remote_a_interface_id</attribute>
-                        </neighbour>
-                        <neighbour id="remote_b_ci">
-                            <attribute>remote_b_ci_id</attribute>
                         </neighbour>
                         <neighbour id="remote_b_interface">
                             <attribute>remote_b_interface_id</attribute>
