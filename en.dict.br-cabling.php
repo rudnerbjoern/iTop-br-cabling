@@ -14,27 +14,33 @@
 
 Dict::Add('EN US', 'English', 'English', array(
     'Class:PatchCable' => 'Patch Cable',
-    'Class:PatchCable/Attribute:patchcablecolor_id' => 'Main Patch Cable Color',
+    'Class:PatchCable:baseinfo' => 'General Information',
+    'Class:PatchCable:sidea' => 'Side \'A\'',
+    'Class:PatchCable:sideb' => 'Side \'B\'',
+    'Class:PatchCable/Attribute:location_id' => 'Location',
+    'Class:PatchCable/Attribute:location_name' => 'Location name',
+    'Class:PatchCable/Attribute:patchcablecolor_id' => 'Color',
+    'Class:PatchCable/Attribute:patchcablecolor_name' => 'Color name',
+    'Class:PatchCable/Attribute:patchcabletype_id' => 'Cable type',
+    'Class:PatchCable/Attribute:patchcabletype_name' => 'Cable type name',
+    'Class:PatchCable/Attribute:length' => 'Length',
     'Class:PatchCable/Attribute:interfaceconnector_a_id' => 'Connector type on side A',
     'Class:PatchCable/Attribute:interfaceconnector_a_name' => 'Connector type on side A name',
-    'Class:PatchCable/Attribute:remote_a_ci_id' => '\'A\' side connected to equipment',
-    'Class:PatchCable/Attribute:remote_a_ci_name' => '\'A\' side connected to equipment name',
-    'Class:PatchCable/Attribute:remote_a_interface_id' => '\'A\' side connected to port',
-    'Class:PatchCable/Attribute:remote_a_interface_id_finalclass_recall' => 'Equipment type on \'A\' side',
-    'Class:PatchCable/Attribute:remote_a_interface_name' => '\'A\' side connected to equipment name',
+    'Class:PatchCable/Attribute:remote_a_ci_id' => '\'A\' side connected to device',
+    'Class:PatchCable/Attribute:remote_a_ci_name' => '\'A\' side connected to device name',
+    'Class:PatchCable/Attribute:remote_a_interface_id' => 'Interface on \'A\' side device',
+    'Class:PatchCable/Attribute:remote_a_interface_id_finalclass_recall' => 'Device type on \'A\' side',
+    'Class:PatchCable/Attribute:remote_a_interface_name' => 'Interface on \'A\' side device name',
     'Class:PatchCable/Attribute:interfaceconnector_b_id' => 'Connector type on side B',
     'Class:PatchCable/Attribute:interfaceconnector_b_name' => 'Connector type on side B name',
-    'Class:PatchCable/Attribute:remote_b_ci_id' => '\'B\' side connected to equipment',
-    'Class:PatchCable/Attribute:remote_b_ci_name' => '\'B\' side connected to equipment name',
-    'Class:PatchCable/Attribute:remote_b_interface_id' => '\'B\' side connected to port',
-    'Class:PatchCable/Attribute:remote_b_interface_id_finalclass_recall' => 'Equipment type on \'B\' side',
-    'Class:PatchCable/Attribute:remote_b_interface_name' => '\'B\' side connected to port name',
-    'Class:PatchCable/Attribute:length' => 'Cable length',
+    'Class:PatchCable/Attribute:remote_b_ci_id' => '\'B\' side connected to device',
+    'Class:PatchCable/Attribute:remote_b_ci_name' => '\'B\' side connected to device name',
+    'Class:PatchCable/Attribute:remote_b_interface_id' => 'Interface on \'B\' side device',
+    'Class:PatchCable/Attribute:remote_b_interface_id_finalclass_recall' => 'Device type on \'B\' side',
+    'Class:PatchCable/Attribute:remote_b_interface_name' => 'Interface on \'B\' side device name',
     'Class:PatchCable/Attribute:straight-crossed' => 'Straight or Crossed Cable',
     'Class:PatchCable/Attribute:straight-crossed/Value:straight' => 'Straight',
     'Class:PatchCable/Attribute:straight-crossed/Value:crossed' => 'Crossed',
-    'Class:PatchCable:sidea' => 'Side \'A\'',
-    'Class:PatchCable:sideb' => 'Side \'B\'',
 ));
 
 //
@@ -46,6 +52,17 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:PatchCableColor/Attribute:name' => 'Name',
     'Class:PatchCableColor/Attribute:comment' => 'Comment',
     'Class:PatchCableColor/Attribute:patchcable_list' => 'Patch Cable List',
+));
+
+//
+// Class: PatchCableType
+//
+
+Dict::Add('EN US', 'English', 'English', array(
+    'Class:PatchCableType' => 'Patch Cable Type',
+    'Class:PatchCableType/Attribute:name' => 'Name',
+    'Class:PatchCableType/Attribute:comment' => 'Comment',
+    'Class:PatchCableType/Attribute:patchcable_list' => 'Patch Cable List',
 ));
 
 //

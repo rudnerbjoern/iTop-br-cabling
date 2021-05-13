@@ -14,7 +14,16 @@
 
 Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCable' => 'Patchkabel',
-    'Class:PatchCable/Attribute:patchcablecolor_id' => 'Patchkabel Farbe',
+    'Class:PatchCable:baseinfo' => 'Allgemeine Informationen',
+    'Class:PatchCable:sidea' => 'Seite \'A\'',
+    'Class:PatchCable:sideb' => 'Seite \'B\'',
+    'Class:PatchCable/Attribute:location_id' => 'Standort',
+    'Class:PatchCable/Attribute:location_name' => 'Standort Name',
+    'Class:PatchCable/Attribute:patchcablecolor_id' => 'Farbe',
+    'Class:PatchCable/Attribute:patchcablecolor_name' => 'Farbe Name',
+    'Class:PatchCable/Attribute:patchcabletype_id' => 'Kabelart',
+    'Class:PatchCable/Attribute:patchcabletype_name' => 'Kabelart Name',
+    'Class:PatchCable/Attribute:length' => 'Länge',
     'Class:PatchCable/Attribute:interfaceconnector_a_id' => 'Anschluss Seite A',
     'Class:PatchCable/Attribute:interfaceconnector_a_name' => 'Anschluss Seite A Name',
     'Class:PatchCable/Attribute:remote_a_ci_id' => 'Seite \'A\' verbunden mit CI',
@@ -29,7 +38,6 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCable/Attribute:remote_b_interface_id' => 'Seite \'B\' verbunden mit Port',
     'Class:PatchCable/Attribute:remote_b_interface_id_finalclass_recall' => 'CI Typ an Seite \'B\'',
     'Class:PatchCable/Attribute:remote_b_interface_name' => 'Seite \'B\' verbunden mit Port Name',
-    'Class:PatchCable/Attribute:length' => 'Kabellänge',
     'Class:PatchCable/Attribute:straight-crossed' => 'Normal oder gekreuztes Kabel',
     'Class:PatchCable/Attribute:straight-crossed/Value:straight' => 'Normal',
     'Class:PatchCable/Attribute:straight-crossed/Value:crossed' => 'Gekreuzt',
@@ -44,6 +52,17 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCableColor/Attribute:name' => 'Name',
     'Class:PatchCableColor/Attribute:comment' => 'Anmerkung',
     'Class:PatchCableColor/Attribute:patchcable_list' => 'Patchkabel Liste',
+));
+
+//
+// Class: PatchCableType
+//
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
+    'Class:PatchCableType' => 'Patchkabel Art',
+    'Class:PatchCableType/Attribute:name' => 'Name',
+    'Class:PatchCableType/Attribute:comment' => 'Anmerkung',
+    'Class:PatchCableType/Attribute:patchcable_list' => 'Patchkabel Liste',
 ));
 
 //
