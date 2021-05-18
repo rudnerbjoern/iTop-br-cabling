@@ -595,23 +595,17 @@
                                 }
                             }
                             print "networkdevice_id = ".$networkdevice_id." - connectableci_id = ".$connectableci_id;
-                            if (!(($networkdevice_id == 0) && ($connectableci_id == 0)))
+                            if (!(($networkdevice_id = 0) && ($connectableci_id = 0)))
                             {
                                 print "need to connect here";
                                 $sOQL = "SELECT lnkConnectableCIToNetworkDevice WHERE networkdevice_id = :networkdevice_id AND connectableci_id = :connectableci_id";
-								$oLnkSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('networkdevice_id' => $networkdevice_id, 'connectableci_id' => $connectableci_id,));
-                                $iCount = $oLnkSet->CountWithLimit(2);
-                                if ($iCount == 1)
-                                {} else
-                                while ($oLnk = $oLnkSet->Fetch())
+								$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('networkdevice_id' => $networkdevice_id, 'connectableci_id' => $connectableci_id,));
+                                while ($oConnection = $oConnectionSet->Fetch())
 								{
-                                        print "Updating : '".$oLnk->Get('name')."'<br>";
-                                        $oLnk->Set('networkdevice_id', $networkdevice_id);
-                                        $oLnk->Set('connectableci_id', $connectableci_id);
-                                        $oLnk->Set('connection_type', 'downlink');
-                                        $oLnk->Set('network_port', 'network_port HIPPI');
-                                        $oLnk->Set('device_port', 'device_port HOPPI');
-										$oLnk->DBUpdate();
+									print "Updating : '".$oConnection->Get('name')."'<br>";
+                                        $oConnection->Set('networkdevice_id', $networkdevice_id);
+                                        $oConnection->Set('connectableci_id', $connectableci_id);
+										$oConnection->DBUpdate();
 								}
                             }
 							print "ConnectCable ends<BR>";
