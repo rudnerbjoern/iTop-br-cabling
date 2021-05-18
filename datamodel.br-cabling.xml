@@ -527,8 +527,8 @@
 									{
 										print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('patchcable_id', $this->GetKey());
-										// set on each end the opposite end too
-										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_a_interface_id'));
+										// set on each end the opposite end too (this is remote b by intend!)
+										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_b_interface_id'));
 										$oConnection->DBUpdate();
 									}
 								}
@@ -550,8 +550,8 @@
 									{
 										print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('patchcable_id', $this->GetKey());
-										// set on each end the opposite end too
-										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_b_interface_id'));
+										// set on each end the opposite end too (this is remote a by intend!)
+										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_a_interface_id'));
 										$oConnection->DBUpdate();
 									}
 								}
