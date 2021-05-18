@@ -288,11 +288,11 @@
                 </field>
                 <field id="remote_a_interface_id" xsi:type="AttributeExternalKey">
                     <sql>remote_a_interface_id</sql>
-                    <target_class>PhysicalInterface</target_class>
+                    <target_class>NetworkInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT FiberChannelInterface WHERE patchcable_id = '' AND connectableci_id = :this->remote_a_ci_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_a_ci_id" />
@@ -325,11 +325,11 @@
                 </field>
                 <field id="remote_b_interface_id" xsi:type="AttributeExternalKey">
                     <sql>remote_b_interface_id</sql>
-                    <target_class>PhysicalInterface</target_class>
+                    <target_class>NetworkInterface</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT FiberChannelInterface WHERE patchcable_id = '' AND connectableci_id = :this->remote_b_ci_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_b_ci_id" />
@@ -474,9 +474,6 @@
                 </search>
                 <list>
                     <items>
-                        <item id="name">
-                            <rank>10</rank>
-                        </item>
                         <item id="location_id">
                             <rank>20</rank>
                         </item>
@@ -519,7 +516,7 @@
 								print "remote_a_interface_name = ".$this->Get('remote_a_interface_name')."<br>";
 								// try to get the port this cable is connected to
 								$oRemoteInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_a_interface_id'));
-								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface'))
+								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface' || get_class($oRemoteInterface) == 'FiberChannelInterface'))
 								{
 									print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
@@ -542,7 +539,7 @@
 								print "remote_b_interface_name = ".$this->Get('remote_b_interface_name')."<br>";
 								// try to get the port this cable is connected to
 								$oRemoteInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_b_interface_id'));
-								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface'))
+								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface' || get_class($oRemoteInterface) == 'FiberChannelInterface'))
 								{
 									print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
@@ -732,7 +729,7 @@
             </relations>
         </class>
     -->
-        <class id="PhysicalInterface" _delta="must_exist">
+        <class id="NetworkInterface" _delta="must_exist">
             <fields>
                 <field id="patchcable_id" xsi:type="AttributeExternalKey" _delta="define">
                     <sql>patchcable_id</sql>
@@ -996,6 +993,91 @@
             -->
             </relations>
         </class>
+
+
+        <class id="PhysicalInterface" _delta="must_exist">
+            <presentation>
+                <details>
+                    <items>
+                        <item id="col:col2">
+                            <items>
+                                <item id="fieldset:Class:PhysicalInterface:patchcable" _delta="define">
+                                    <rank>30</rank>
+                                    <items>
+                                        <item id="patchcable_id">
+                                            <rank>10</rank>
+                                        </item>
+                                        <item id="patchcable_remote_port_id">
+                                            <rank>20</rank>
+                                        </item>
+                                    </items>
+                                </item>
+                            </items>
+                        </item>
+                    </items>
+                </details>
+                <list>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                        <item id="patchcable_remote_port_id" _delta="define">
+                            <rank>130</rank>
+                        </item>
+                    </items>
+                </list>
+                <search>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                    </items>
+                </search>
+            </presentation>
+        </class>
+
+        <class id="FiberChannelInterface" _delta="must_exist">
+            <presentation>
+                <details>
+                    <items>
+                        <item id="col:col2">
+                            <items>
+                                <item id="fieldset:Class:PhysicalInterface:patchcable" _delta="define">
+                                    <rank>30</rank>
+                                    <items>
+                                        <item id="patchcable_id">
+                                            <rank>10</rank>
+                                        </item>
+                                        <item id="patchcable_remote_port_id">
+                                            <rank>20</rank>
+                                        </item>
+                                    </items>
+                                </item>
+                            </items>
+                        </item>
+                    </items>
+                </details>
+                <list>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                        <item id="patchcable_remote_port_id" _delta="define">
+                            <rank>130</rank>
+                        </item>
+                    </items>
+                </list>
+                <search>
+                    <items>
+                        <item id="patchcable_id" _delta="define">
+                            <rank>120</rank>
+                        </item>
+                    </items>
+                </search>
+            </presentation>
+        </class>
+
+
         <class id="PatchPanel" _delta="define">
             <parent>DatacenterDevice</parent>
             <properties>
