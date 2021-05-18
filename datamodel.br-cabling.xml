@@ -602,16 +602,15 @@
 								$oLnkSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('networkdevice_id' => $networkdevice_id, 'connectableci_id' => $connectableci_id,));
                                 $iCount = $oLnkSet->CountWithLimit(2);
                                 if ($iCount == 1)
-                                {} else
-                                while ($oLnk = $oLnkSet->Fetch())
-								{
-                                        print "Updating : '".$oLnk->Get('name')."'<br>";
-                                        $oLnk->Set('networkdevice_id', $networkdevice_id);
-                                        $oLnk->Set('connectableci_id', $connectableci_id);
-                                        $oLnk->Set('connection_type', 'downlink');
-                                        $oLnk->Set('network_port', 'network_port HIPPI');
-                                        $oLnk->Set('device_port', 'device_port HOPPI');
-										$oLnk->DBUpdate();
+                                {
+                                    $oLnk = $oLnkSet->Fetch();
+                                    print "Updating : '".$oLnk->Get('name')."'<br>";
+                                    $oLnk->Set('networkdevice_id', $networkdevice_id);
+                                    $oLnk->Set('connectableci_id', $connectableci_id);
+                                    $oLnk->Set('connection_type', 'downlink');
+                                    $oLnk->Set('network_port', 'network_port HIPPI');
+                                    $oLnk->Set('device_port', 'device_port HOPPI');
+                                    $oLnk->DBUpdate();
 								}
                             }
 							print "ConnectCable ends<BR>";
