@@ -515,11 +515,11 @@
 							{
 								print "remote_a_interface_name = ".$this->Get('remote_a_interface_name')."<br>";
 								// try to get the port this cable is connected to
-								$oRemoteInterface = MetaModel::GetObject('NetworkInterface', $this->Get('remote_a_interface_id'));
+								$oRemoteInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_a_interface_id'));
 								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface' || get_class($oRemoteInterface) == 'FiberChannelInterface'))
 								{
 									print "Test Object OK<br>";
-									$sOQL = "SELECT NetworkInterface WHERE id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_a_interface_id'),));
 
 									// There should be one link - do it in a safe manner anyway
@@ -538,11 +538,11 @@
 							{
 								print "remote_b_interface_name = ".$this->Get('remote_b_interface_name')."<br>";
 								// try to get the port this cable is connected to
-								$oRemoteInterface = MetaModel::GetObject('NetworkInterface', $this->Get('remote_b_interface_id'));
+								$oRemoteInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_b_interface_id'));
 								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface' || get_class($oRemoteInterface) == 'FiberChannelInterface'))
 								{
 									print "Test Object OK<br>";
-									$sOQL = "SELECT NetworkInterface WHERE id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_b_interface_id'),));
 
 									// There should be one link - do it in a safe manner anyway
@@ -630,11 +630,11 @@
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oRemoteInterface = MetaModel::GetObject('NetworkInterface', $this->GetOriginal('remote_a_interface_id'), false);
-								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface' || get_class($oRemoteInterface) == 'FiberChannelInterface'))
+								$oRemoteInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_a_interface_id'), false);
+								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT NetworkInterface WHERE patchcable_id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
@@ -655,11 +655,11 @@
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oRemoteInterface = MetaModel::GetObject('NetworkInterface', $this->GetOriginal('remote_b_interface_id'), false);
-								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface' || get_class($oRemoteInterface) == 'FiberChannelInterface'))
+								$oRemoteInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_b_interface_id'), false);
+								if (is_object($oRemoteInterface) && (get_class($oRemoteInterface) == 'PatchPanelPort' || get_class($oRemoteInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
-									$sOQL = "SELECT NetworkInterface WHERE patchcable_id = :device";
+									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
