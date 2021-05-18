@@ -518,8 +518,8 @@
 							{
 								// print "remote_a_interface_name = ".$this->Get('remote_a_interface_name')."<br>";
 								// try to get the port this cable is connected to
-								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_a_interface_id'));
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
+								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_a_interface_id'));
+								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
@@ -541,8 +541,8 @@
 							{
 								// print "remote_b_interface_name = ".$this->Get('remote_b_interface_name')."<br>";
 								// try to get the port this cable is connected to
-								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_b_interface_id'));
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
+								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_b_interface_id'));
+								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
@@ -579,8 +579,8 @@
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_a_interface_id'), false);
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
+								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_a_interface_id'), false);
+								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
@@ -604,8 +604,8 @@
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_b_interface_id'), false);
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort' || get_class($oDevice) == 'PhysicalInterface'))
+								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_b_interface_id'), false);
+								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
@@ -762,8 +762,8 @@
 							{
 								// print "connected_to_name = ".$this->Get('connected_to_name')."<br>";
 								// try to get the port this port is connected to
-								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->Get('connected_to_interface_id'));
-								if (is_object($oDevice) && (get_class($oDevice) == 'PhysicalInterface'))
+								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('connected_to_interface_id'));
+								if (is_object($oInterface) && (get_class($oInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
@@ -807,8 +807,8 @@
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oDevice = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('connected_to_interface_id'), false);
-								if (is_object($oDevice) && (get_class($oDevice) == 'PhysicalInterface'))
+								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('connected_to_interface_id'), false);
+								if (is_object($oInterface) && (get_class($oInterface) == 'PhysicalInterface'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE connected_to_interface_id = :device";
@@ -1230,8 +1230,8 @@
 							{
 								// print "remotebackpanelport_name = ".$this->Get('remotebackpanelport_name')."<br>";
 								// try to get the port this port is connected to
-								$oDevice = MetaModel::GetObject('PatchPanelPort', $this->Get('remotebackpanelport_id'));
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort'))
+								$oInterface = MetaModel::GetObject('PatchPanelPort', $this->Get('remotebackpanelport_id'));
+								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PatchPanelPort WHERE id = :device";
@@ -1266,8 +1266,8 @@
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
 								// see also $$mustBeFound value for MetaModel::GetObject
-								$oDevice = MetaModel::GetObject('PatchPanelPort', $this->GetOriginal('remotebackpanelport_id'), false);
-								if (is_object($oDevice) && (get_class($oDevice) == 'PatchPanelPort'))
+								$oInterface = MetaModel::GetObject('PatchPanelPort', $this->GetOriginal('remotebackpanelport_id'), false);
+								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort'))
 								{
 									// print "Test Object OK<br>";
 									$sOQL = "SELECT PatchPanelPort WHERE remotebackpanelport_id = :device";
