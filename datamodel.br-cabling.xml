@@ -1038,13 +1038,13 @@
 
         <class id="FiberChannelInterface" _delta="must_exist">
             <fields>
-                <field id="interfaceconnector_id" xsi:type="AttributeExternalKey" _delta="define">
+                <field id="interfaceconnector_id" _delta="define">
                     <sql>interfaceconnector_id</sql>
                     <target_class>InterfaceConnector</target_class>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
                 </field>
-                <field id="interfaceconnector_name" xsi:type="AttributeExternalField" _delta="define">
+                <field id="interfaceconnector_name" _delta="define">
                     <extkey_attcode>interfaceconnector_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
