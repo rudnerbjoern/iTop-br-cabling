@@ -292,7 +292,7 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT FiberChannelInterface WHERE patchcable_id = '' AND connectableci_id = :this->remote_a_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT FiberChannelInterface WHERE patchcable_id = '' AND connectableci_id = :this->remote_a_ci_id AND interfaceconnector_id = :this->interfaceconnector_a_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_a_ci_id" />
@@ -329,7 +329,7 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT FiberChannelInterface WHERE patchcable_id = '' AND connectableci_id = :this->remote_b_ci_id]]>
+                        <![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT FiberChannelInterface WHERE patchcable_id = '' AND connectableci_id = :this->remote_b_ci_id AND interfaceconnector_id = :this->interfaceconnector_b_id ]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_b_ci_id" />
@@ -1037,11 +1037,30 @@
         </class>
 
         <class id="FiberChannelInterface" _delta="must_exist">
+            <fields>
+                <field id="interfaceconnector_id" _delta="define">
+                    <sql>interfaceconnector_id</sql>
+                    <target_class>InterfaceConnector</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_AUTO</on_target_delete>
+                </field>
+                <field id="interfaceconnector_name" _delta="define">
+                    <extkey_attcode>interfaceconnector_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+            </fields>
             <presentation>
                 <details>
                     <items>
                         <item id="col:col2">
                             <items>
+                                <item id="fieldset:Class:NetworkInterface:moreinfo">
+                                    <items>
+                                        <item id="interfaceconnector_id" _delta="define">
+                                            <rank>70</rank>
+                                        </item>
+                                    </items>
+                                </item>
                                 <item id="fieldset:Class:PhysicalInterface:patchcable" _delta="define">
                                     <rank>30</rank>
                                     <items>
