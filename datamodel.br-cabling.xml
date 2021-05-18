@@ -603,9 +603,6 @@
                                 while ($oConnection = $oConnectionSet->Fetch())
 								{
 									print "Updating : '".$oConnection->Get('name')."'<br>";
-                                        $oConnection->Set('networkdevice_id', $networkdevice_id);
-                                        $oConnection->Set('connectableci_id', $connectableci_id);
-										$oConnection->DBUpdate();
 								}
                             }
 							print "ConnectCable ends<BR>";
