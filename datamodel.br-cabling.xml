@@ -562,11 +562,9 @@
                         <item id="connectableci_id">
                             <rank>70</rank>
                         </item>
-                        <!--
                         <item id="genericcommvirtinterface_list">
                             <rank>100</rank>
                         </item>
-                    -->
                     </items>
                 </details>
                 <default_search>
@@ -637,7 +635,6 @@
                 </relation>
             </relations>
         </class>
-
 
         <!-- This class defines the specific attributes of a Generic Physical Communication interface -->
         <class id="GenericCommPhysInterface" _delta="define">
@@ -733,7 +730,6 @@
                 </field>
             </fields>
             <methods>
-                <!--
                 <method id="ConnectRemotePort">
                     <static>false</static>
                     <access>protected</access>
@@ -777,8 +773,6 @@
 					]]>
                     </code>
                 </method>
-            -->
-                <!--
                 <method id="DisconnectRemotePort">
                     <static>false</static>
                     <access>protected</access>
@@ -823,8 +817,6 @@
 					]]>
                     </code>
                 </method>
-            -->
-                <!--
                 <method id="AfterInsert">
                     <static>false</static>
                     <access>protected</access>
@@ -837,8 +829,6 @@
                         }]]>
                     </code>
                 </method>
-            -->
-                <!--
                 <method id="OnUpdate">
                     <static>false</static>
                     <access>protected</access>
@@ -852,8 +842,6 @@
 				        }]]>
                     </code>
                 </method>
-                -->
-                <!--
                 <method id="OnDelete">
                     <static>false</static>
                     <access>protected</access>
@@ -866,9 +854,7 @@
 				        }]]>
                     </code>
                 </method>
-            -->
                 <!-- This method filters the search interface for virtual to generic connections -->
-                <!--
                 <method id="PrefillSearchForm">
                     <code>
                         <![CDATA[
@@ -891,7 +877,6 @@
 						}]]>
                     </code>
                 </method>
-            -->
             </methods>
             <presentation>
                 <details>
@@ -1087,7 +1072,6 @@
                 </relation>
             </relations>
         </class>
-
 
         <!-- This class defines the specific attributes of a Generic Virtual Communication interface. It also adds the redudancy function -->
         <class id="GenericCommVirtInterface" _delta="define">
@@ -1500,7 +1484,6 @@
             </presentation>
         </class>
 
-
         <!-- This class defines a Generic Network Connection device (instead of a Network Device, a SAN Device...) -->
         <class id="GenericCommDevice" _delta="define">
             <parent>DatacenterDevice</parent>
@@ -1577,7 +1560,6 @@
                         <item id="services_list">
                             <rank>80</rank>
                         </item>
-
                         <item id="col:col1">
                             <rank>90</rank>
                             <items>
@@ -1802,7 +1784,6 @@
             <relations />
         </class>
 
-
         <!-- The next modifications are here to extends existing classes -->
         <class id="ConnectableCI" _delta="must_exist">
             <fields>
@@ -2001,7 +1982,6 @@
             </relations>
         </class>
 
-
         <!-- Patch Cables Colors -->
         <class id="PatchCableColor" _delta="define">
             <parent>cmdbAbstractObject</parent>
@@ -2176,7 +2156,6 @@
                 </list>
             </presentation>
         </class>
-
 
         <class id="NAS" _delta="must_exist">
             <presentation>
