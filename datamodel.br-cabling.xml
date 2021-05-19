@@ -296,7 +296,6 @@
             </presentation>
         </class>
 
-
         <!-- This class stores redundancy protocols for virtual interfaces : LACP, active/standby, active/active... -->
         <class id="VirtualCommRedundancy" _delta="define">
             <parent>Typology</parent>
@@ -331,11 +330,6 @@
                 </uniqueness_rules>
             </properties>
             <fields>
-                <field id="name" xsi:type="AttributeString">
-                    <sql>name</sql>
-                    <default_value />
-                    <is_null_allowed>false</is_null_allowed>
-                </field>
                 <field id="description" xsi:type="AttributeText">
                     <sql>description</sql>
                     <default_value />
