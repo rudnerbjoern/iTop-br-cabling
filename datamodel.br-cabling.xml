@@ -407,7 +407,6 @@
                 <naming>
                     <attributes>
                         <attribute id="name" />
-                        <attribute id="connectableci_name" />
                     </attributes>
                 </naming>
                 <display_template />
@@ -416,8 +415,6 @@
                     <attributes>
                         <attribute id="name" />
                         <attribute id="finalclass" />
-                        <attribute id="connectableci_id" />
-                        <attribute id="connectableci_name" />
                     </attributes>
                 </reconciliation>
             </properties>
@@ -967,6 +964,7 @@
                                         </item>
                                     </items>
                                 </item>
+                                <!--
                                 <item id="fieldset:Class:GenericCommPhysInterface:patchcable">
                                     <rank>30</rank>
                                     <items>
@@ -978,6 +976,7 @@
                                         </item>
                                     </items>
                                 </item>
+                            -->
                             </items>
                         </item>
                         <!--
