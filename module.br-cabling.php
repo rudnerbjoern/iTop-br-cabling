@@ -21,8 +21,9 @@ SetupWebPage::AddModule(
         //
         'dependencies' => array(
             'itop-config-mgmt/2.7.1',
-            'teemip-network-mgmt-extended/1.1.0',
             'itop-datacenter-mgmt/2.7.0',
+            'teemip-datacenter-mgmt-adaptor/2.7.0',
+            'teemip-network-mgmt-extended/1.1.0',
             'itop-virtualization-mgmt/2.7.0',
             'itop-storage-mgmt/2.7.0'
         ),

@@ -1333,7 +1333,7 @@
                                         <item id="iosversion_id">
                                             <rank>40</rank>
                                         </item>
-                                        <item id="managementip">
+                                        <item id="managementip_id">
                                             <rank>50</rank>
                                         </item>
                                         <item id="ram">
@@ -1430,7 +1430,7 @@
                         <item id="location_id">
                             <rank>60</rank>
                         </item>
-                        <item id="managementip">
+                        <item id="managementip_id">
                             <rank>70</rank>
                         </item>
                         <item id="brand_id">
