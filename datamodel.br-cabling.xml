@@ -508,7 +508,7 @@
             <fields>
                 <field id="genericcomminterface_id" xsi:type="AttributeExternalKey">
                     <sql>genericcomminterface_id</sql>
-                    <target_class>CenericCommInterface</target_class>
+                    <target_class>GenericCommInterface</target_class>
                     <is_null_allowed>false</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
                     <jointype />
