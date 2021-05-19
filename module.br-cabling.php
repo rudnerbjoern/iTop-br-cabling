@@ -33,7 +33,8 @@ SetupWebPage::AddModule(
         // Components
         //
         'datamodel' => array(
-            'model.br-cabling.php'
+            'main.schirrms-generic-connection.php',
+            'model.br-cabling.php',
         ),
         'webservice' => array(),
         'data.struct' => array(
