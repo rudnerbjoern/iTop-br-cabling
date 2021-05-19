@@ -123,9 +123,9 @@ class GenericCommFunct
             $sOQL = "SELECT	GenericCommPhysInterface WHERE connectableci_id = :device";
             $oPhysInterfaceSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $device_id));
             while ($oPhysInterface = $oPhysInterfaceSet->Fetch()) {
-                if ($oPhysInterface->Get('connected_to_id') != 0) {
+                if ($oPhysInterface->Get('connected_to_device_id') != 0) {
                     if ($oPhysInterface->Get('connection_impact') == 'depends') {
-                        $aConnDevDepends[$oPhysInterface->GetKey()] = array('remoteDev' => $oPhysInterface->Get('connected_to_device_id'), 'remoteInt' => $oPhysInterface->Get('connected_to_id'));
+                        $aConnDevDepends[$oPhysInterface->GetKey()] = array('remoteDev' => $oPhysInterface->Get('connected_to_device_id'), 'remoteInt' => $oPhysInterface->Get('connected_to_device_id'));
                         $aVirtInterfaces = GenericCommFunct::IterateVirtInterfaces(0, $oPhysInterface->GetKey(), $oPhysInterface->GetKey(), $aVirtInterfaces);
                     } else {
                         $aConnDevImpacts[$oPhysInterface->Get('connected_to_device_id')] = '';
