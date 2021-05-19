@@ -479,6 +479,155 @@
             </presentation>
         </class>
 
+        <class id="lnkGenericCommInterfaceToIPAddress" _delta="define">
+            <parent>cmdbAbstractObject</parent>
+            <properties>
+                <is_link>1</is_link>
+                <category>bizmodel,ipmgmt</category>
+                <abstract>false</abstract>
+                <key_type>autoincrement</key_type>
+                <db_table>lnkgenericcomminterfacetoipaddress</db_table>
+                <db_key_field>id</db_key_field>
+                <db_final_class_field />
+                <naming>
+                    <format>%1$s %2$s</format>
+                    <attributes>
+                        <attribute id="genericcomminterface_id" />
+                        <attribute id="ipaddress_id" />
+                    </attributes>
+                </naming>
+                <display_template />
+                <icon />
+                <reconciliation>
+                    <attributes>
+                        <attribute id="genericcomminterface_id" />
+                        <attribute id="ipaddress_id" />
+                    </attributes>
+                </reconciliation>
+            </properties>
+            <fields>
+                <field id="genericcomminterface_id" xsi:type="AttributeExternalKey">
+                    <sql>genericcomminterface_id</sql>
+                    <target_class>CenericCommInterface</target_class>
+                    <is_null_allowed>false</is_null_allowed>
+                    <on_target_delete>DEL_AUTO</on_target_delete>
+                    <jointype />
+                </field>
+                <field id="genericcomminterface_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>genericcomminterface_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+                <field id="ipaddress_id" xsi:type="AttributeExternalKey">
+                    <sql>ipaddress_id</sql>
+                    <target_class>IPAddress</target_class>
+                    <is_null_allowed>false</is_null_allowed>
+                    <on_target_delete>DEL_AUTO</on_target_delete>
+                    <jointype />
+                </field>
+                <field id="usage_id" xsi:type="AttributeExternalField">
+                    <extkey_attcode>ipaddress_id</extkey_attcode>
+                    <target_attcode>usage_id</target_attcode>
+                </field>
+                <field id="ipaddress_org_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>ipaddress_id</extkey_attcode>
+                    <target_attcode>org_name</target_attcode>
+                </field>
+            </fields>
+            <methods>
+                <method id="AfterInsert">
+                    <comment />
+                    <static>false</static>
+                    <access>public</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[	public function AfterInsert()
+    {
+		parent::AfterInsert();
+
+		$iIpId = $this->Get('ipaddress_id');
+		if ($iIpId != null)
+		{
+			$oIP = MetaModel::GetObject('IPAddress', $iIpId, false /* MustBeFound */);
+			if (!is_null($oIP))
+			{
+				$oIP->Set('status', 'allocated');
+				$oIP->DBUpdate();
+			}
+		}
+	}]]>
+                    </code>
+                </method>
+                <method id="AfterDelete">
+                    <comment />
+                    <static>false</static>
+                    <access>public</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[	public function OnDelete()
+    {
+		parent::AfterDelete();
+
+		$iIpIntId = $this->Get('genericcomminterface_id');
+		$iIpId = $this->Get('ipaddress_id');
+		if ($iIpId != null)
+		{
+			$oIP = MetaModel::GetObject('IPAddress', $iIpId, false /* MustBeFound */);
+			if ($oIP != null)
+			{
+				if ($oIP->Get('status') == 'allocated')
+				{
+					// Reset status only of IP is not set on another interface
+					$oIPInterfaceToIPAddressSearch = DBObjectSearch::FromOQL("SELECT lnkGenericCommInterfaceToIPAddress AS l WHERE l.ipaddress_id = $iIpId AND l.genericcomminterface_id != $iIpIntId");
+					$oIPInterfaceToIPAddressSet = new CMDBObjectSet($oIPInterfaceToIPAddressSearch);
+					if (!$oIPInterfaceToIPAddressSet->CountExceeds(0))
+					{
+						$oIP->Set('status', 'unassigned');
+						$oIP->DBUpdate();
+					}
+				}
+			}
+		}
+	}]]>
+                    </code>
+                </method>
+            </methods>
+            <presentation>
+                <details>
+                    <items>
+                        <item id="genericcomminterface_id">
+                            <rank>10</rank>
+                        </item>
+                        <item id="ipaddress_id">
+                            <rank>20</rank>
+                        </item>
+                    </items>
+                </details>
+                <search>
+                    <items>
+                        <item id="genericcomminterface_id">
+                            <rank>10</rank>
+                        </item>
+                        <item id="ipaddress_id">
+                            <rank>20</rank>
+                        </item>
+                    </items>
+                </search>
+                <list>
+                    <items>
+                        <item id="genericcomminterface_id">
+                            <rank>10</rank>
+                        </item>
+                        <item id="ipaddress_id">
+                            <rank>20</rank>
+                        </item>
+                        <item id="usage_id">
+                            <rank>30</rank>
+                        </item>
+                    </items>
+                </list>
+            </presentation>
+        </class>
+
         <!-- This abstract class defines a Generic Communication Interface. -->
         <class id="GenericCommInterface" _delta="define">
             <parent>GenericCommLayer1Interface</parent>
@@ -539,6 +688,14 @@
                     <ext_key_to_remote>genericcommvirtinterface_id</ext_key_to_remote>
                     <duplicates />
                 </field>
+                <field id="ip_list" xsi:type="AttributeLinkedSetIndirect">
+                    <linked_class>lnkGenericCommInterfaceToIPAddress</linked_class>
+                    <ext_key_to_me>genericcomminterface_id</ext_key_to_me>
+                    <count_min>0</count_min>
+                    <count_max>0</count_max>
+                    <ext_key_to_remote>ipaddress_id</ext_key_to_remote>
+                    <duplicates />
+                </field>
             </fields>
             <methods />
             <presentation>
@@ -564,6 +721,9 @@
                         </item>
                         <item id="genericcommvirtinterface_list">
                             <rank>100</rank>
+                        </item>
+                        <item id="ip_list">
+                            <rank />
                         </item>
                     </items>
                 </details>
@@ -717,7 +877,6 @@
                     <extkey_attcode>connected_to_interface_id</extkey_attcode>
                     <target_attcode>name</target_attcode>
                 </field>
-
                 <field id="connection_impact" xsi:type="AttributeEnum">
                     <values>
                         <value id="impacts">impacts</value>
@@ -954,6 +1113,9 @@
                         </item>
                         <item id="genericcommvirtinterface_list">
                             <rank>100</rank>
+                        </item>
+                        <item id="ip_list">
+                            <rank>110</rank>
                         </item>
                     </items>
                 </details>
@@ -1219,6 +1381,9 @@
                         <item id="genericcomminterface_list">
                             <rank>100</rank>
                         </item>
+                        <item id="ip_list">
+                            <rank>110</rank>
+                        </item>
                     </items>
                 </details>
                 <default_search>
@@ -1295,6 +1460,7 @@
                 </list>
             </presentation>
         </class>
+
 
         <!-- This class create a many to many link between generic Interface and virtual Generic Interface
 			The idea is that the Virtual interface always depend from the generic interface
