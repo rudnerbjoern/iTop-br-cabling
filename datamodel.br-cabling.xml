@@ -164,7 +164,7 @@
                 </details>
                 <list>
                     <items>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                     </items>
@@ -184,7 +184,7 @@
                         <item id="name">
                             <rank>10</rank>
                         </item>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                     </items>
@@ -3489,6 +3489,39 @@
         </class>
 
         <class id="VirtualMachine" _delta="must_exist">
+            <presentation>
+                <details>
+                    <items>
+                        <item id="genericcommphysinterface_list" _delta="define">
+                            <rank>55</rank>
+                        </item>
+                        <item id="genericcommvirtinterface_list" _delta="define">
+                            <rank>56</rank>
+                        </item>
+                    </items>
+                </details>
+            </presentation>
+        </class>
+
+        <class id="PhysicalDevice" _delta="must_exist">
+            <fields>
+                <field id="genericcommphysinterface_list" xsi:type="AttributeLinkedSet" _delta="define">
+                    <linked_class>GenericCommPhysInterface</linked_class>
+                    <ext_key_to_me>connectableci_id</ext_key_to_me>
+                    <edit_mode>in_place</edit_mode>
+                    <tracking_level>all</tracking_level>
+                    <count_min>0</count_min>
+                    <count_max>0</count_max>
+                </field>
+                <field id="genericcommvirtinterface_list" xsi:type="AttributeLinkedSet" _delta="define">
+                    <linked_class>GenericCommVirtInterface</linked_class>
+                    <ext_key_to_me>connectableci_id</ext_key_to_me>
+                    <edit_mode>in_place</edit_mode>
+                    <tracking_level>all</tracking_level>
+                    <count_min>0</count_min>
+                    <count_max>0</count_max>
+                </field>
+            </fields>
             <presentation>
                 <details>
                     <items>
