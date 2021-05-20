@@ -3502,7 +3502,7 @@
                 </details>
             </presentation>
         </class>
-
+        <!-- TODO: Fix this later
         <class id="PhysicalDevice" _delta="must_exist">
             <fields>
                 <field id="genericcommphysinterface_list" xsi:type="AttributeLinkedSet" _delta="define">
@@ -3595,7 +3595,7 @@
                 </details>
             </presentation>
         </class>
-
+    -->
 
         <class id="StorageSystem" _delta="must_exist">
             <presentation>
