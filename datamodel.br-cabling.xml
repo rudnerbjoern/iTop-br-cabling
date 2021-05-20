@@ -3488,20 +3488,6 @@
             </presentation>
         </class>
 
-        <class id="VirtualMachine" _delta="must_exist">
-            <presentation>
-                <details>
-                    <items>
-                        <item id="genericcommphysinterface_list" _delta="define">
-                            <rank>55</rank>
-                        </item>
-                        <item id="genericcommvirtinterface_list" _delta="define">
-                            <rank>56</rank>
-                        </item>
-                    </items>
-                </details>
-            </presentation>
-        </class>
         <!-- TODO: Fix this later
         <class id="PhysicalDevice" _delta="must_exist">
             <fields>
