@@ -10,7 +10,7 @@
 
 SetupWebPage::AddModule(
     __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-    'br-cabling/0.1.1',
+    'br-cabling/0.2.0',
     array(
         // Identification
         //
@@ -23,7 +23,6 @@ SetupWebPage::AddModule(
             'itop-config-mgmt/2.7.1',
             'itop-datacenter-mgmt/2.7.0',
             'teemip-datacenter-mgmt-adaptor/2.7.0',
-            'teemip-network-mgmt-extended/1.1.0',
             'itop-virtualization-mgmt/2.7.0',
             'itop-storage-mgmt/2.7.0'
         ),

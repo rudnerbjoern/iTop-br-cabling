@@ -9,7 +9,7 @@
  */
 
 //
-// Class: PatchCable
+// Classes: Generic
 //
 
 Dict::Add('DE DE', 'German', 'Deutsch', array(
@@ -34,6 +34,13 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:VirtualCommRedundancy/Attribute:description' => 'Beschreibung',
     'Class:VirtualCommRedundancy/Attribute:virtualcommredundancy_list' => 'Virtual interfaces using this redundancy protocol',
     'Class:VirtualCommRedundancy/UniquenessRule:name' => 'There is already a redundancy mode with that name',
+));
+
+//
+// Class: PatchCable
+//
+
+Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCable' => 'Patchkabel',
     'Class:PatchCable:baseinfo' => 'Allgemeine Informationen',
     'Class:PatchCable:sidea' => 'Seite \'A\'',
