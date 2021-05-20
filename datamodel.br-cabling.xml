@@ -3580,6 +3580,7 @@
         </class>
 
         <class id="SANSwitch" _delta="delete" />
+        <class id="lnkSanToDatacenterDevice" _delta="delete" />
         <class id="FiberChannelInterface" _delta="delete" />
 
         <class id="TapeLibrary" _delta="must_exist">
