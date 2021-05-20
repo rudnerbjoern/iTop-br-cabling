@@ -4572,7 +4572,7 @@
         <menu id="Typology" xsi:type="DashboardMenuNode" _delta="must_exist">
             <definition>
                 <cells>
-                    <cell id="Network" _delta="must_exist">
+                    <cell id="Network">
                         <dashlets>
                             <dashlet id="90" xsi:type="DashletBadge" _delta="define">
                                 <rank>6</rank>
