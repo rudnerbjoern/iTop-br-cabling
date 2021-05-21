@@ -1485,12 +1485,12 @@
 					<target_attcode>name</target_attcode>
 				</field>
             -->
-                <field id="ipinterface_list" xsi:type="AttributeLinkedSetIndirect">
-                    <linked_class>lnkIPInterfaceToServerVirtualInterface</linked_class>
+                <field id="physicalinterface_list" xsi:type="AttributeLinkedSetIndirect">
+                    <linked_class>lnkPhysicalInterfaceToServerVirtualInterface</linked_class>
                     <ext_key_to_me>servervirtualinterface_id</ext_key_to_me>
                     <count_min>0</count_min>
                     <count_max>0</count_max>
-                    <ext_key_to_remote>ipinterface_id</ext_key_to_remote>
+                    <ext_key_to_remote>physicalinterface_id</ext_key_to_remote>
                     <duplicates />
                 </field>
                 <field id="server_id" xsi:type="AttributeExternalKey">
@@ -1535,15 +1535,13 @@
                     <code>
                         <![CDATA[public function PrefillSearchForm(&$aContextParam)
 						{
-                            if($aContextParam['dest_class'] == 'IPInterface')
+                            if($aContextParam['dest_class'] == 'PhysicalInterface')
 							{
                                 //if(MetaModel::IsValidAttCode($aContextParam['dest_class'],'server_id') && !empty($aContextParam['source_obj']->Get('server_id')) && MetaModel::IsValidAttCode($aContextParam['dest_class'],'interfacespeed_id') && !empty($aContextParam['source_obj']->Get('interfacespeed_id')))
-								if(MetaModel::IsValidAttCode($aContextParam['dest_class'],'server_id') && !empty($aContextParam['source_obj']->Get('server_id')) &&
-								MetaModel::IsValidAttCode($aContextParam['dest_class'],'interfacespeed_id') && !empty($aContextParam['source_obj']->Get('interfacespeed_id')))
+								if(MetaModel::IsValidAttCode($aContextParam['dest_class'],'connectableci_id') && !empty($aContextParam['source_obj']->Get('server_id')))
 								{
 									$aContextParam['filter']->ResetCondition();
-									$aContextParam['filter']->AddCondition('server_id', $aContextParam['source_obj']->Get('server_id'));
-									$aContextParam['filter']->AddCondition('interfacespeed_id', $aContextParam['source_obj']->Get('interfacespeed_id'));
+									$aContextParam['filter']->AddCondition('connectableci_id', $aContextParam['source_obj']->Get('server_id'));
 									$aContextParam['filter']->AddCondition('id',$aContextParam['source_obj']->GetKey(), '!=');
 									}
 							}
@@ -1600,7 +1598,7 @@
                                 </item>
                             </items>
                         </item>
-                        <item id="ipinterface_list">
+                        <item id="physicalinterface_list">
                             <rank>100</rank>
                         </item>
                         <item id="vlans_list">
@@ -1684,19 +1682,19 @@
         <!-- This class create a many to many link between generic Interface and virtual Generic Interface
 			The idea is that the Virtual interface always depend from the generic interface
 			Also a virtual interface is member of the same device that the generic interface(s) -->
-        <class id="lnkIPInterfaceToServerVirtualInterface" _delta="define">
+        <class id="lnkPhysicalInterfaceToServerVirtualInterface" _delta="define">
             <parent>cmdbAbstractObject</parent>
             <properties>
                 <is_link>1</is_link>
                 <category>bizmodel</category>
                 <abstract>false</abstract>
                 <key_type>autoincrement</key_type>
-                <db_table>lnkipinterfacetogenericcommvirtnterface</db_table>
+                <db_table>lnkphysicalinterfacetogenericcommvirtnterface</db_table>
                 <db_key_field>id</db_key_field>
                 <db_final_class_field />
                 <naming>
                     <attributes>
-                        <attribute id="ipinterface_id" />
+                        <attribute id="physicalinterface_id" />
                         <attribute id="servervirtualinterface_id" />
                     </attributes>
                 </naming>
@@ -1704,15 +1702,15 @@
                 <icon />
                 <reconciliation>
                     <attributes>
-                        <attribute id="ipinterface_id" />
+                        <attribute id="physicalinterface_id" />
                         <attribute id="servervirtualinterface_id" />
                     </attributes>
                 </reconciliation>
             </properties>
             <fields>
-                <field id="ipinterface_id" xsi:type="AttributeExternalKey">
-                    <sql>ipinterface_id</sql>
-                    <target_class>IPInterface</target_class>
+                <field id="physicalinterface_id" xsi:type="AttributeExternalKey">
+                    <sql>physicalinterface_id</sql>
+                    <target_class>PhysicalInterface</target_class>
                     <is_null_allowed>false</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
                 </field>
@@ -1727,7 +1725,7 @@
             <presentation>
                 <details>
                     <items>
-                        <item id="ipinterface_id">
+                        <item id="physicalinterface_id">
                             <rank>10</rank>
                         </item>
                         <item id="servervirtualinterface_id">
@@ -1737,7 +1735,7 @@
                 </details>
                 <search>
                     <items>
-                        <item id="ipinterface_id">
+                        <item id="physicalinterface_id">
                             <rank>10</rank>
                         </item>
                         <item id="servervirtualinterface_id">
@@ -1747,7 +1745,7 @@
                 </search>
                 <list>
                     <items>
-                        <item id="ipinterface_id">
+                        <item id="physicalinterface_id">
                             <rank>10</rank>
                         </item>
                         <item id="servervirtualinterface_id">
