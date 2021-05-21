@@ -1431,17 +1431,7 @@
             <relations />
         </class>
     -->
-        <!--
-        <class id="Model" _delta="must_exist">
-            <fields>
-                <field id="type" xsi:type="AttributeEnum" _delta="must_exist">
-                    <values>
-                        <value id="PatchPanel" _delta="define">PatchPanel</value>
-                    </values>
-                </field>
-            </fields>
-        </class>
-    -->
+
 
         <!-- Virtual Server Network Interfaces (like bonding or teaming) -->
         <class id="ServerVirtualInterface" _delta="define">
@@ -1473,18 +1463,6 @@
                 </obsolescence>
             </properties>
             <fields>
-                <!--
-    				<field id="virtualcommredundancy_id" xsi:type="AttributeExternalKey">
-					<sql>virtualcommredundancy_id</sql>
-					<target_class>VirtualCommRedundancy</target_class>
-					<is_null_allowed>false</is_null_allowed>
-					<on_target_delete>DEL_MANUAL</on_target_delete>
-				</field>
-				<field id="virtualcommredundancy_name" xsi:type="AttributeExternalField">
-					<extkey_attcode>virtualcommredundancy_id</extkey_attcode>
-					<target_attcode>name</target_attcode>
-				</field>
-            -->
                 <field id="physicalinterface_list" xsi:type="AttributeLinkedSetIndirect">
                     <linked_class>lnkPhysicalInterfaceToServerVirtualInterface</linked_class>
                     <ext_key_to_me>servervirtualinterface_id</ext_key_to_me>
@@ -1626,11 +1604,6 @@
                         <item id="macaddress">
                             <rank>40</rank>
                         </item>
-                        <!--
-                        <item id="virtualcommredundancy_id">
-                            <rank>50</rank>
-                        </item>
-                    -->
                     </items>
                 </default_search>
                 <search>
@@ -1647,11 +1620,6 @@
                         <item id="macaddress">
                             <rank>40</rank>
                         </item>
-                        <!--
-                        <item id="virtualcommredundancy_id">
-                            <rank>50</rank>
-                        </item>
-                    -->
                     </items>
                 </search>
                 <list>
@@ -1665,11 +1633,6 @@
                         <item id="macaddress">
                             <rank>40</rank>
                         </item>
-                        <!--
-                        <item id="virtualcommredundancy_id">
-                            <rank>50</rank>
-                        </item>
-                    -->
                         <item id="comment">
                             <rank>60</rank>
                         </item>
@@ -1678,10 +1641,9 @@
             </presentation>
         </class>
 
-
-        <!-- This class create a many to many link between generic Interface and virtual Generic Interface
-			The idea is that the Virtual interface always depend from the generic interface
-			Also a virtual interface is member of the same device that the generic interface(s) -->
+        <!-- This class create a many to many link between physical Interface and virtual Server Interface
+			The idea is that the Virtual interface always depend from the physical interface
+			Also a virtual interface is member of the same device that the physical interface(s) -->
         <class id="lnkPhysicalInterfaceToServerVirtualInterface" _delta="define">
             <parent>cmdbAbstractObject</parent>
             <properties>
@@ -1719,6 +1681,22 @@
                     <target_class>ServerVirtualInterface</target_class>
                     <is_null_allowed>false</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
+                </field>
+                <field id="physicalinterface_device_id" xsi:type="AttributeExternalField">
+                    <extkey_attcode>physicalinterface_id</extkey_attcode>
+                    <target_attcode>connectableci_id</target_attcode>
+                </field>
+                <field id="physicalinterface_device_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>physicalinterface_id</extkey_attcode>
+                    <target_attcode>connectableci_name</target_attcode>
+                </field>
+                <field id="servervirtualinterface_device_id" xsi:type="AttributeExternalField">
+                    <extkey_attcode>servervirtualinterface_id</extkey_attcode>
+                    <target_attcode>server_id</target_attcode>
+                </field>
+                <field id="servervirtualinterface_device_name" xsi:type="AttributeExternalField">
+                    <extkey_attcode>servervirtualinterface_id</extkey_attcode>
+                    <target_attcode>server_name</target_attcode>
                 </field>
             </fields>
             <methods />
@@ -1956,6 +1934,7 @@
                 </details>
             </presentation>
         </class>
+
         <class id="VLAN" _delta="must_exist">
             <fields>
                 <field id="servervirtualinterfaces_list" xsi:type="AttributeLinkedSetIndirect" _delta="define">
@@ -1977,6 +1956,17 @@
                 </details>
             </presentation>
         </class>
+        <!--
+        <class id="Model" _delta="must_exist">
+            <fields>
+                <field id="type" xsi:type="AttributeEnum" _delta="must_exist">
+                    <values>
+                        <value id="PatchPanel" _delta="define">PatchPanel</value>
+                    </values>
+                </field>
+            </fields>
+        </class>
+    -->
     </classes>
     <menus>
         <menu id="ConfigManagementOverview" xsi:type="DashboardMenuNode" _delta="must_exist">

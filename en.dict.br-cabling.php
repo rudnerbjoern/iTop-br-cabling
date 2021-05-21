@@ -56,6 +56,11 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:physicalinterface_device_name' => 'Server name',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:vrf_id' => 'VRF',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:vfr_name' => 'Name',
+
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface' => 'Link Physical Interface / Server Virtual interface',
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:physicalinterface_id' => 'Physical interface',
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id' => 'Server virtual interface',
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id+' => '',
 ));
 
 //
