@@ -1461,7 +1461,7 @@
                     </attributes>
                 </naming>
                 <display_template />
-                <icon>asset/img/ndvi.png</icon>
+                <icon>images/ndvi.png</icon>
                 <reconciliation>
                     <attributes>
                         <attribute id="name" />
@@ -1844,11 +1844,11 @@
                                 <rank>15</rank>
                                 <class>PatchPanelPort</class>
                             </dashlet>
+                            -->
                             <dashlet id="99" xsi:type="DashletBadge" _delta="define">
                                 <rank>8</rank>
                                 <class>PatchCable</class>
                             </dashlet>
-                        -->
                         </dashlets>
                     </cell>
                 </cells>

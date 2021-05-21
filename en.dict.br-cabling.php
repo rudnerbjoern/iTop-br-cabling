@@ -25,6 +25,40 @@ Dict::Add('EN US', 'English', 'English', array(
 ));
 
 //
+// Server Virtual Interfaces
+//
+Dict::Add('EN US', 'English', 'English', array(
+    'Class:Server/Attribute:servervirtualinterfaces_list' => 'Virtual interfaces',
+    'Class:Server/Attribute:servervirtualinterfaces_list+' => 'All the virtual interfaces configured onthis server',
+    'Class:VLAN/Attribute:servervirtualinterfaces_list' => 'Virtual server interfaces',
+    'Class:VLAN/Attribute:servervirtualinterfaces_list+' => 'List of all virtual server network interfaces attached to the VLAN',
+    'Class:ServerVirtualInterface' => 'Server Virtual Interface',
+    'Class:ServerVirtualInterface+' => '',
+    'Class:ServerVirtualInterface/Attribute:server_id' => 'Server',
+    'Class:ServerVirtualInterface/Attribute:vlans_list' => 'VLANs',
+    'Class:ServerVirtualInterface/Attribute:vrfs_list' => 'VRFs',
+    'Class:ServerVirtualInterface/Attribute:status' => 'Status',
+    'Class:ServerVirtualInterface/Attribute:status/Value:active' => 'Active',
+    'Class:ServerVirtualInterface/Attribute:status/Value:inactive' => 'Inactive',
+
+    'Class:lnkServerVirtualInterfaceToVLAN' => 'Link Server Virtual Interface / VLAN',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_id' => 'Server virtual interface',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_name' => 'Server virtual interface name',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_device_id' => 'Server',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_device_name' => 'Server name',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:vlan_id' => 'VLAN',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:vlan_tag' => 'Tag',
+
+    'Class:lnkServerVirtualInterfaceToVRF' => 'Link Server Virtual Interface / VRF',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_id' => 'Server virtual interface',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_name' => 'Server virtual interface name',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_device_id' => 'Server',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:physicalinterface_device_name' => 'Server name',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:vrf_id' => 'VRF',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:vfr_name' => 'Name',
+));
+
+//
 // Class: PatchCable
 //
 Dict::Add('EN US', 'English', 'English', array(
