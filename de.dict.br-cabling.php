@@ -9,37 +9,24 @@
  */
 
 //
-// Classes: Generic
+// Typology Information
 //
-
 Dict::Add('DE DE', 'German', 'Deutsch', array(
-    'Class:GenericPhysCommConnector' => 'Stecker Typ',
-    'Class:GenericPhysCommConnector/Attribute:description' => 'Beschreibung',
-    'Class:GenericPhysCommConnector/Attribute:genericcommphysinterface_list' => 'Schnittstellen mit diesem Stecker',
-    'Class:GenericPhysCommConnector/UniquenessRule:name' => 'Es gibt schon einen Stecker mit diesem Namen',
-    'Class:GenericCommProtocol' => 'Verbindungsprotokoll',
-    'Class:GenericCommProtocol/Attribute:description' => 'Beschreibung',
-    'Class:GenericCommProtocol/Attribute:genericcomminterface_list' => 'Schnittstellen mit diesem Protokoll',
-    'Class:GenericCommProtocol/UniquenessRule:name' => 'Es gibt schon ein Protokoll mit diesem Namen',
-    'Class:GenericCommSpeed' => 'Interface Geschwindigkeit',
-    'Class:GenericCommSpeed/Attribute:name' => 'Human readable interface speed',
-    'Class:GenericCommSpeed/Attribute:name+' => 'This field is read only, and calculated from the speed in bit per second',
-    'Class:GenericCommSpeed/Attribute:bitspeed' => 'interface speed in bit per second',
-    'Class:GenericCommSpeed/Attribute:description' => 'Beschreibung',
-    'Class:GenericCommSpeed/Attribute:genericcomminterface_list' => 'Interfaces running at this speed',
-    'Class:GenericCommSpeed/UniquenessRule:bitspeed' => 'That speed is already defined',
-    'Class:VirtualCommRedundancy' => 'Redundanzmodus',
-    'Class:VirtualCommRedundancy/Attribute:name' => 'Functional redundancy name',
-    'Class:VirtualCommRedundancy/Attribute:name+' => 'This is the kind of protocol used by the device to ensure redundancy (LACP, Active/Standby...)',
-    'Class:VirtualCommRedundancy/Attribute:description' => 'Beschreibung',
-    'Class:VirtualCommRedundancy/Attribute:virtualcommredundancy_list' => 'Virtual interfaces using this redundancy protocol',
-    'Class:VirtualCommRedundancy/UniquenessRule:name' => 'There is already a redundancy mode with that name',
+    'Class:InterfaceSpeed/Attribute:bitspeed' => 'Geschwindigkeit in bit per second',
+    'Class:InterfaceSpeed/UniquenessRule:bitspeed' => 'That speed is already defined',
+    'Class:PatchCableType' => 'Patchkabel Art',
+    'Class:PatchCableType/Attribute:name' => 'Name',
+    'Class:PatchCableType/Attribute:description' => 'Beschreibung',
+    'Class:PatchCableType/Attribute:patchcable_list' => 'Patchkabel',
+    'Class:PatchCableColor' => 'Patchkabel Farbe',
+    'Class:PatchCableColor/Attribute:name' => 'Name',
+    'Class:PatchCableColor/Attribute:description' => 'Beschreibung',
+    'Class:PatchCableColor/Attribute:patchcable_list' => 'Patchkabel',
 ));
 
 //
 // Class: PatchCable
 //
-
 Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchCable' => 'Patchkabel',
     'Class:PatchCable:baseinfo' => 'Allgemeine Informationen',
@@ -72,34 +59,11 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 ));
 
 //
-// Class: PatchCableColor
-//
-
-Dict::Add('DE DE', 'German', 'Deutsch', array(
-    'Class:PatchCableColor' => 'Patchkabel Farbe',
-    'Class:PatchCableColor/Attribute:name' => 'Name',
-    'Class:PatchCableColor/Attribute:comment' => 'Anmerkung',
-    'Class:PatchCableColor/Attribute:patchcable_list' => 'Patchkabel Liste',
-));
-
-//
-// Class: PatchCableType
-//
-
-Dict::Add('DE DE', 'German', 'Deutsch', array(
-    'Class:PatchCableType' => 'Patchkabel Art',
-    'Class:PatchCableType/Attribute:name' => 'Name',
-    'Class:PatchCableType/Attribute:comment' => 'Anmerkung',
-    'Class:PatchCableType/Attribute:patchcable_list' => 'Patchkabel Liste',
-));
-
-//
 // Class: PhysicalInterface
 //
-
 Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PhysicalInterface:patchcable' => 'Patchkabel',
-    'Class:PhysicalInterface/Attribute:patchcable_id' => 'Patchkabel id',
+    'Class:PhysicalInterface/Attribute:patchcable_id' => 'Patchkabel',
     'Class:PhysicalInterface/Attribute:patchcable_name' => 'Patchkabel Name',
     'Class:PhysicalInterface/Attribute:patchcable_remote_port_id' => 'Patchkabel Remote Port',
     'Class:PhysicalInterface/Attribute:patchcable_remote_port_name' => 'Patchkabel Remote Port Name',
@@ -108,7 +72,6 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 //
 // Class: PatchPanel
 //
-
 Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchPanel' => 'Patchpanel',
     'Class:PatchPanel+' => '',
@@ -119,7 +82,6 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 //
 // Class: PatchPanelPort
 //
-
 Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:PatchPanelPort' => 'Patchpanel Port',
     'Class:PatchPanelPort/Attribute:connectableci_id' => 'Patchpanel zu diesem Port',

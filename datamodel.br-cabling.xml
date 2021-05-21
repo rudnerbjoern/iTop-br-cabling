@@ -10,7 +10,7 @@
 
         <class id="InterfaceSpeed" _delta="must_exist">
             <properties>
-                <icon _delta="define">images/interface-speed.png</icon>
+                <icon _delta="redefine">images/interface-speed.png</icon>
                 <uniqueness_rules>
                     <rule id="name" _delta="delete_if_exists" />
                     <rule id="bitspeed" _delta="define">
@@ -134,9 +134,9 @@
 
         <!-- Patch Cables Colors -->
         <class id="PatchCableColor" _delta="define">
-            <parent>cmdbAbstractObject</parent>
+            <parent>Typology</parent>
             <properties>
-                <category>bizmodel,searchable</category>
+                <category>bizmodel,searchable,configmgmt</category>
                 <abstract>false</abstract>
                 <key_type>autoincrement</key_type>
                 <db_table>patchcablecolor</db_table>
@@ -166,13 +166,8 @@
                 </uniqueness_rules>
             </properties>
             <fields>
-                <field id="name" xsi:type="AttributeString">
-                    <sql>name</sql>
-                    <default_value />
-                    <is_null_allowed>false</is_null_allowed>
-                </field>
-                <field id="comment" xsi:type="AttributeText">
-                    <sql>comment</sql>
+                <field id="description" xsi:type="AttributeText">
+                    <sql>description</sql>
                     <default_value />
                     <is_null_allowed>true</is_null_allowed>
                 </field>
@@ -192,11 +187,11 @@
                         <item id="name">
                             <rank>10</rank>
                         </item>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                         <item id="patchcable_list">
-                            <rank>30</rank>
+                            <rank>100</rank>
                         </item>
                     </items>
                 </details>
@@ -205,14 +200,14 @@
                         <item id="name">
                             <rank>10</rank>
                         </item>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                     </items>
                 </search>
                 <list>
                     <items>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                     </items>
@@ -221,9 +216,9 @@
         </class>
         <!-- Patch Cables Type -->
         <class id="PatchCableType" _delta="define">
-            <parent>cmdbAbstractObject</parent>
+            <parent>Typology</parent>
             <properties>
-                <category>bizmodel,searchable</category>
+                <category>bizmodel,searchable,configmgmt</category>
                 <abstract>false</abstract>
                 <key_type>autoincrement</key_type>
                 <db_table>patchcabletype</db_table>
@@ -253,13 +248,8 @@
                 </uniqueness_rules>
             </properties>
             <fields>
-                <field id="name" xsi:type="AttributeString">
-                    <sql>name</sql>
-                    <default_value />
-                    <is_null_allowed>false</is_null_allowed>
-                </field>
-                <field id="comment" xsi:type="AttributeText">
-                    <sql>comment</sql>
+                <field id="description" xsi:type="AttributeText">
+                    <sql>description</sql>
                     <default_value />
                     <is_null_allowed>true</is_null_allowed>
                 </field>
@@ -279,11 +269,11 @@
                         <item id="name">
                             <rank>10</rank>
                         </item>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                         <item id="patchcable_list">
-                            <rank>30</rank>
+                            <rank>100</rank>
                         </item>
                     </items>
                 </details>
@@ -292,14 +282,14 @@
                         <item id="name">
                             <rank>10</rank>
                         </item>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                     </items>
                 </search>
                 <list>
                     <items>
-                        <item id="comment">
+                        <item id="description">
                             <rank>20</rank>
                         </item>
                     </items>
