@@ -8,7 +8,7 @@
         Every extension on the iTop Hub is designed to work with the default installation.
         This many changes will break compatibility and upgrade paths. -->
 
-        <class id="InterfaceSpeed" _delta="must_exists">
+        <class id="InterfaceSpeed" _delta="must_exist">
             <properties>
                 <icon _delta="define">images/interface-speed.png</icon>
                 <uniqueness_rules>
