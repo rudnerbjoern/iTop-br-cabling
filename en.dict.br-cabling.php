@@ -29,12 +29,18 @@ Dict::Add('EN US', 'English', 'English', array(
 // Server Virtual Interfaces
 //
 Dict::Add('EN US', 'English', 'English', array(
-    'Class:Server/Attribute:servervirtualinterfaces_list' => 'Virtual server interfaces',
-    'Class:Server/Attribute:servervirtualinterfaces_list+' => 'All the virtual interfaces configured onthis server',
+    'Class:Server/Attribute:servervirtualinterfaces_list' => 'Server virtual interfaces',
+    'Class:Server/Attribute:servervirtualinterfaces_list+' => 'All the virtual interfaces configured on this server',
     'Class:VLAN/Attribute:servervirtualinterfaces_list' => 'Virtual server interfaces',
     'Class:VLAN/Attribute:servervirtualinterfaces_list+' => 'List of all virtual server network interfaces attached to the VLAN',
-    'Class:ServerVirtualInterface' => 'Server Virtual Interface',
+    'Class:ServerVirtualInterface' => 'Server virtual interface',
     'Class:ServerVirtualInterface+' => '',
+    'Class:ServerVirtualInterface/Attribute:physicalinterface_list' => 'Physical interfaces',
+    'Class:ServerVirtualInterface/Attribute:redundancy' => 'High availability',
+    'Class:ServerVirtualInterface/Attribute:redundancy/disabled' => 'The virtual interface is up if all the physical interfaces are up',
+    'Class:ServerVirtualInterface/Attribute:redundancy/count' => 'The virtual interface is up if at least %1$s physical interface(s) is(are) up',
+    'Class:ServerVirtualInterface/Attribute:redundancy/percent' => 'The virtual interface is up if at least %1$s %% of the physical interfaces are up',
+
     'Class:ServerVirtualInterface/Attribute:server_id' => 'Server',
     'Class:ServerVirtualInterface/Attribute:vlans_list' => 'VLANs',
     'Class:ServerVirtualInterface/Attribute:vrfs_list' => 'VRFs',
@@ -58,10 +64,10 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:vrf_id' => 'VRF',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:vfr_name' => 'Name',
 
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface' => 'Link Physical Interface / Server Virtual interface',
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:physicalinterface_id' => 'Physical interface',
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id' => 'Server virtual interface',
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id+' => '',
+    //'Class:lnkPhysicalInterfaceToServerVirtualInterface' => 'Link Physical Interface / Server Virtual interface',
+    //'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:physicalinterface_id' => 'Physical interface',
+    //'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id' => 'Server virtual interface',
+    //'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id+' => '',
 ));
 
 //
@@ -107,6 +113,8 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:PhysicalInterface/Attribute:patchcable_name' => 'Patch Cable Name',
     'Class:PhysicalInterface/Attribute:patchcable_remote_port_id' => 'Patch Cable Remote Port',
     'Class:PhysicalInterface/Attribute:patchcable_remote_port_name' => 'Patch Cable Remote Port Name',
+    'Class:PhysicalInterface/Attribute:servervirtualinterface_id' => 'Server Virtual Interface',
+    'Class:PhysicalInterface/Attribute:servervirtualinterface_name' => 'Server Virtual Interface Name',
 ));
 
 //

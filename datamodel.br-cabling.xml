@@ -782,6 +782,20 @@
 
         <class id="PhysicalInterface" _delta="must_exist">
             <fields>
+
+
+                <field id="servervirtualinterface_id" xsi:type="AttributeExternalKey" _delta="define">
+                    <sql>servervirtualinterface_id</sql>
+                    <target_class>ServerVirtualInterface</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                </field>
+                <field id="servervirtualinterface_name" xsi:type="AttributeExternalField" _delta="define">
+                    <extkey_attcode>servervirtualinterface_id</extkey_attcode>
+                    <target_attcode>name</target_attcode>
+                </field>
+
+
                 <field id="patchcable_id" xsi:type="AttributeExternalKey" _delta="define">
                     <sql>patchcable_id</sql>
                     <target_class>PatchCable</target_class>
@@ -1011,6 +1025,9 @@
                                 </item>
                             </items>
                         </item>
+                        <item id="servervirtualinterface_id" _delta="define">
+                            <rank>119</rank>
+                        </item>
                     </items>
                 </details>
                 <list>
@@ -1032,6 +1049,19 @@
                 </search>
             </presentation>
             <relations>
+                <relations>
+                    <relation id="impacts">
+                        <neighbours>
+                            <neighbour id="servervirtualinterface" _delta="define">
+                                <attribute>servervirtualinterface_id</attribute>
+                                <!--
+                                <query_down>SELECT ServerVirtualInterface AS svi JOIN lnkPhysicalInterfaceToServerVirtualInterface AS l1 ON l1.servervirtualinterface_id = svi.id JOIN PhysicalInterface AS pi ON l1.physicalinterface_id = pi.id WHERE pi.id = :this-&gt;id</query_down>
+                                <direction>down</direction>
+                                -->
+                            </neighbour>
+                        </neighbours>
+                    </relation>
+                </relations>
                 <!-- this needs more testing
                 <relation id="impacts">
                     <neighbours>
@@ -1465,6 +1495,28 @@
                 </obsolescence>
             </properties>
             <fields>
+
+                <field id="physicalinterface_list" xsi:type="AttributeLinkedSet">
+                    <linked_class>PhysicalInterface</linked_class>
+                    <ext_key_to_me>servervirtualinterface_id</ext_key_to_me>
+                    <edit_mode>add_remove</edit_mode>
+                    <count_min>0</count_min>
+                    <count_max>0</count_max>
+                </field>
+                <field id="redundancy" xsi:type="AttributeRedundancySettings">
+                    <sql>redundancy</sql>
+                    <relation_code>impacts</relation_code>
+                    <from_class>PhysicalInterface</from_class>
+                    <neighbour_id>servervirtualinterface</neighbour_id>
+                    <enabled>true</enabled>
+                    <enabled_mode>user</enabled_mode>
+                    <min_up>1</min_up>
+                    <min_up_type>count</min_up_type>
+                    <min_up_mode>user</min_up_mode>
+                </field>
+
+
+                <!--
                 <field id="physicalinterface_list" xsi:type="AttributeLinkedSetIndirect">
                     <linked_class>lnkPhysicalInterfaceToServerVirtualInterface</linked_class>
                     <ext_key_to_me>servervirtualinterface_id</ext_key_to_me>
@@ -1473,6 +1525,7 @@
                     <ext_key_to_remote>physicalinterface_id</ext_key_to_remote>
                     <duplicates />
                 </field>
+            -->
                 <field id="server_id" xsi:type="AttributeExternalKey">
                     <sql>server_id</sql>
                     <target_class>Server</target_class>
@@ -1529,6 +1582,15 @@
                     </code>
                 </method>
             </methods>
+            <relations>
+                <relation id="impacts">
+                    <neighbours>
+                        <neighbour id="server">
+                            <attribute>server_id</attribute>
+                        </neighbour>
+                    </neighbours>
+                </relation>
+            </relations>
             <presentation>
                 <details>
                     <items>
@@ -1646,6 +1708,7 @@
         <!-- This class create a many to many link between physical Interface and virtual Server Interface
 			The idea is that the Virtual interface always depend from the physical interface
 			Also a virtual interface is member of the same device that the physical interface(s) -->
+        <!--
         <class id="lnkPhysicalInterfaceToServerVirtualInterface" _delta="define">
             <parent>cmdbAbstractObject</parent>
             <properties>
@@ -1735,6 +1798,7 @@
                 </list>
             </presentation>
         </class>
+    -->
 
         <class id="lnkServerVirtualInterfaceToVLAN" _delta="define">
             <parent>cmdbAbstractObject</parent>
