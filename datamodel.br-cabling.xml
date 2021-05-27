@@ -1457,8 +1457,8 @@
                 <db_final_class_field />
                 <naming>
                     <attributes>
-                        <attribute id="server_name" />
                         <attribute id="name" />
+                        <attribute id="server_name" />
                     </attributes>
                 </naming>
                 <display_template />
