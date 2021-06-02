@@ -404,8 +404,7 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <filter>
-                        <!--<![CDATA[SELECT PatchPanelPort WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>-->
-                        <![CDATA[SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
+                        <![CDATA[SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_a_id AND connectableci_id = :this->remote_a_ci_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_a_ci_id" />
@@ -442,8 +441,7 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_MANUAL</on_target_delete>
                     <filter>
-                        <!--<![CDATA[SELECT PatchPanelPort WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id UNION SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>-->
-                        <![CDATA[SELECT PhysicalInterface WHERE  patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
+                        <![CDATA[SELECT PhysicalInterface WHERE patchcable_id = '' AND interfaceconnector_id = :this->interfaceconnector_b_id AND connectableci_id = :this->remote_b_ci_id]]>
                     </filter>
                     <dependencies>
                         <attribute id="remote_b_ci_id" />
@@ -626,23 +624,19 @@
                     <code>
                         <![CDATA[protected function ConnectCable()
 						{
-							// print "ConnectCable begins<BR>";
 							// End side A
 							if (!(empty($this->Get('remote_a_interface_id'))))
 							{
-								// print "remote_a_interface_name = ".$this->Get('remote_a_interface_name')."<br>";
 								// try to get the port this cable is connected to
 								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_a_interface_id'));
 								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
-									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_a_interface_id'),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
-										// print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('patchcable_id', $this->GetKey());
 										// set on each end the opposite end too (this is remote b by intend!)
 										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_b_interface_id'));
@@ -653,19 +647,16 @@
 							// End side B
 							if (!(empty($this->Get('remote_b_interface_id'))))
 							{
-								// print "remote_b_interface_name = ".$this->Get('remote_b_interface_name')."<br>";
 								// try to get the port this cable is connected to
 								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->Get('remote_b_interface_id'));
 								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
-									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remote_b_interface_id'),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
-										// print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('patchcable_id', $this->GetKey());
 										// set on each end the opposite end too (this is remote a by intend!)
 										$oConnection->Set('patchcable_remote_port_id', $this->Get('remote_a_interface_id'));
@@ -673,7 +664,6 @@
 									}
 								}
 							}
-							// print "ConnectCable ends<BR>";
 						}]]>
                     </code>
                 </method>
@@ -684,11 +674,9 @@
                     <code>
                         <![CDATA[ protected function DisconnectCable()
 						{
-							// print "DisconnectCable begins<BR>";
 							// End side A
 							if (!(empty($this->GetOriginal('remote_a_interface_id'))))
 							{
-								// print "was connected_to_name = ".$this->GetOriginal('remote_a_interface_name')."<br>";
 								// try to get the port this cable was connected to
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
@@ -696,14 +684,12 @@
 								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_a_interface_id'), false);
 								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
-									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
-										// print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('patchcable_id', '');
 										$oConnection->Set('patchcable_remote_port_id', '');
 										$oConnection->DBUpdate();
@@ -713,7 +699,6 @@
 							// End side B
 							if (!(empty($this->GetOriginal('remote_b_interface_id'))))
 							{
-								// print "was connected_to_name = ".$this->GetOriginal('remote_b_interface_name')."<br>";
 								// try to get the port this cable was connected to
 								// This one was hard to find : adding false in the next request allow a null answer
 								// witch is OK as we have to test after operations anyway
@@ -721,21 +706,18 @@
 								$oInterface = MetaModel::GetObject('PhysicalInterface', $this->GetOriginal('remote_b_interface_id'), false);
 								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort' || get_class($oInterface) == 'PhysicalInterface'))
 								{
-									// print "Test Object OK<br>";
 									$sOQL = "SELECT PhysicalInterface WHERE patchcable_id = :device";
 									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
 
 									// There should be one link - do it in a safe manner anyway
 									while ($oConnection = $oConnectionSet->Fetch())
 									{
-										// print "Updating : '".$oConnection->Get('name')."'<br>";
 										$oConnection->Set('patchcable_id', '');
 										$oConnection->Set('patchcable_remote_port_id', '');
 										$oConnection->DBUpdate();
 									}
 								}
 							}
-							// print "DisconnectCable ends<BR>";
 						}]]>
                     </code>
                 </method>
@@ -777,7 +759,6 @@
                     </code>
                 </method>
             </methods>
-            <relations />
         </class>
 
         <class id="PhysicalInterface" _delta="must_exist">
@@ -1056,394 +1037,6 @@
                 </relations>
             </relations>
         </class>
-
-        <!--
-      <class id="PatchPanel" _delta="define">
-            <parent>DatacenterDevice</parent>
-            <properties>
-                <category>bizmodel,searchable</category>
-                <abstract>false</abstract>
-                <key_type>autoincrement</key_type>
-                <db_table>patchpanel</db_table>
-                <db_key_field>id</db_key_field>
-                <db_final_class_field />
-                <naming>
-                    <attributes>
-                        <attribute id="name" />
-                    </attributes>
-                </naming>
-                <display_template />
-                <icon>images/patchpanel.png</icon>
-                <reconciliation>
-                    <attributes>
-                        <attribute id="name" />
-                        <attribute id="org_id" />
-                        <attribute id="organization_name" />
-                    </attributes>
-                </reconciliation>
-            </properties>
-            <fields>
-                <field id="patchpanelport_list" xsi:type="AttributeLinkedSet">
-                    <linked_class>PatchPanelPort</linked_class>
-                    <ext_key_to_me>connectableci_id</ext_key_to_me>
-                    <edit_mode>in_place</edit_mode>
-                    <tracking_level>all</tracking_level>
-                    <count_min>0</count_min>
-                    <count_max>0</count_max>
-                </field>
-            </fields>
-            <presentation>
-                <details>
-                    <items>
-                        <item id="contacts_list">
-                            <rank>120</rank>
-                        </item>
-                        <item id="documents_list">
-                            <rank>130</rank>
-                        </item>
-                        <item id="patchpanelport_list">
-                            <rank>140</rank>
-                        </item>
-                        <item id="providercontracts_list">
-                            <rank>150</rank>
-                        </item>
-                        <item id="services_list">
-                            <rank>160</rank>
-                        </item>
-                        <item id="fieldset:Class:NetworkInterface:baseinfo">
-                            <rank>10</rank>
-                            <items>
-                                <item id="name">
-                                    <rank>10</rank>
-                                </item>
-                                <item id="org_id">
-                                    <rank>20</rank>
-                                </item>
-                                <item id="status">
-                                    <rank>30</rank>
-                                </item>
-                                <item id="business_criticity">
-                                    <rank>40</rank>
-                                </item>
-                                <item id="location_id">
-                                    <rank>50</rank>
-                                </item>
-                                <item id="rack_id">
-                                    <rank>60</rank>
-                                </item>
-                                <item id="nb_u">
-                                    <rank>80</rank>
-                                </item>
-                                <item id="brand_id">
-                                    <rank>90</rank>
-                                </item>
-                                <item id="model_id">
-                                    <rank>100</rank>
-                                </item>
-                                <item id="description">
-                                    <rank>110</rank>
-                                </item>
-                            </items>
-                        </item>
-                    </items>
-                </details>
-                <search>
-                    <items>
-                        <item id="name">
-                            <rank>10</rank>
-                        </item>
-                        <item id="org_id">
-                            <rank>20</rank>
-                        </item>
-                        <item id="status">
-                            <rank>30</rank>
-                        </item>
-                        <item id="business_criticity">
-                            <rank>40</rank>
-                        </item>
-                        <item id="location_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="rack_id">
-                            <rank>60</rank>
-                        </item>
-                        <item id="brand_id">
-                            <rank>90</rank>
-                        </item>
-                        <item id="model_id">
-                            <rank>100</rank>
-                        </item>
-                    </items>
-                </search>
-                <list>
-                    <items>
-                        <item id="org_id">
-                            <rank>10</rank>
-                        </item>
-                        <item id="status">
-                            <rank>20</rank>
-                        </item>
-                        <item id="business_criticity">
-                            <rank>30</rank>
-                        </item>
-                        <item id="location_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="rack_id">
-                            <rank>60</rank>
-                        </item>
-                        <item id="brand_id">
-                            <rank>90</rank>
-                        </item>
-                        <item id="model_id">
-                            <rank>100</rank>
-                        </item>
-                    </items>
-                </list>
-            </presentation>
-            <methods />
-            <relations />
-        </class>
-       <class id="PatchPanelPort" _delta="define">
-            <parent>PhysicalInterface</parent>
-            <properties>
-                <category>bizmodel,searchable</category>
-                <abstract>false</abstract>
-                <key_type>autoincrement</key_type>
-                <db_table>patchpanelport</db_table>
-                <db_key_field>id</db_key_field>
-                <db_final_class_field />
-                <naming>
-                    <attributes>
-                        <attribute id="connectableci_name" />
-                        <attribute id="name" />
-                    </attributes>
-                </naming>
-                <display_template />
-                <icon>images/patchpanelport.png</icon>
-                <reconciliation>
-                    <attributes>
-                        <attribute id="name" />
-                        <attribute id="connectableci_name" />
-                    </attributes>
-                </reconciliation>
-            </properties>
-            <fields>
-                <field id="remotebackpanelport_id" xsi:type="AttributeExternalKey">
-                    <sql>remotebackpanelport_id</sql>
-                    <target_class>PatchPanelPort</target_class>
-                    <is_null_allowed>true</is_null_allowed>
-                    <on_target_delete>DEL_MANUAL</on_target_delete>
-                    <filter>
-                        <![CDATA[SELECT PatchPanelPort WHERE remotebackpanelport_id = '' AND id != :this->id AND interfaceconnector_id = :this->interfaceconnector_id]]>
-                    </filter>
-                    <dependencies>
-                        <attribute id="interfaceconnector_id" />
-                    </dependencies>
-                </field>
-                <field id="remotebackpanelport_name" xsi:type="AttributeExternalField">
-                    <extkey_attcode>remotebackpanelport_id</extkey_attcode>
-                    <target_attcode>name</target_attcode>
-                </field>
-            </fields>
-            <presentation>
-                <details>
-                    <items>
-                        <item id="fieldset:Class:NetworkInterface:baseinfo">
-                            <rank>10</rank>
-                            <items>
-                                <item id="name">
-                                    <rank>10</rank>
-                                </item>
-                                <item id="comment">
-                                    <rank>20</rank>
-                                </item>
-                                <item id="connectableci_id">
-                                    <rank>30</rank>
-                                </item>
-                                <item id="interfaceconnector_id">
-                                    <rank>40</rank>
-                                </item>
-                                <item id="remotebackpanelport_id">
-                                    <rank>50</rank>
-                                </item>
-                            </items>
-                        </item>
-                        <item id="fieldset:Class:PhysicalInterface:patchcable">
-                            <rank>20</rank>
-                            <items>
-                                <item id="patchcable_id">
-                                    <rank>60</rank>
-                                </item>
-                                <item id="patchcable_remote_port_id">
-                                    <rank>70</rank>
-                                </item>
-                            </items>
-                        </item>
-                    </items>
-                </details>
-                <search>
-                    <items>
-                        <item id="friendlyname">
-                            <rank>10</rank>
-                        </item>
-                        <item id="connectableci_id">
-                            <rank>20</rank>
-                        </item>
-                        <item id="name">
-                            <rank>30</rank>
-                        </item>
-                        <item id="interfaceconnector_id">
-                            <rank>40</rank>
-                        </item>
-                        <item id="remotebackpanelport_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="patchcable_id">
-                            <rank>60</rank>
-                        </item>
-                        <item id="patchcable_remote_port_id" _delta="define">
-                            <rank>70</rank>
-                        </item>
-                    </items>
-                </search>
-                <list>
-                    <items>
-                        <item id="friendlyname">
-                            <rank>10</rank>
-                        </item>
-                        <item id="connectableci_id">
-                            <rank>20</rank>
-                        </item>
-                        <item id="name">
-                            <rank>30</rank>
-                        </item>
-                        <item id="interfaceconnector_id">
-                            <rank>40</rank>
-                        </item>
-                        <item id="remotebackpanelport_id">
-                            <rank>50</rank>
-                        </item>
-                        <item id="patchcable_id">
-                            <rank>60</rank>
-                        </item>
-                        <item id="patchcable_remote_port_id" _delta="define">
-                            <rank>70</rank>
-                        </item>
-                    </items>
-                </list>
-            </presentation>
-            <methods>
-                <method id="ConnectBackPanelRemotePort">
-                    <static>false</static>
-                    <access>protected</access>
-                    <type>Overload-cmdbAbstractObject</type>
-                    <code>
-                        <![CDATA[ protected function ConnectBackPanelRemotePort()
-						{
-							// print "ConnectBackPanelRemotePort begins<BR>";
-							if (!(empty($this->Get('remotebackpanelport_id'))))
-							{
-								// print "remotebackpanelport_name = ".$this->Get('remotebackpanelport_name')."<br>";
-								// try to get the port this port is connected to
-								$oInterface = MetaModel::GetObject('PatchPanelPort', $this->Get('remotebackpanelport_id'));
-								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort'))
-								{
-									// print "Test Object OK<br>";
-									$sOQL = "SELECT PatchPanelPort WHERE id = :device";
-									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->Get('remotebackpanelport_id'),));
-
-									// There should be one link - do it in a safe manner anyway
-									while ($oConnection = $oConnectionSet->Fetch())
-									{
-										// print "Updating : '".$oConnection->Get('name')."'<br>";
-										$oConnection->Set('remotebackpanelport_id', $this->GetKey());
-										// $oConnection->Set('connected_to_device_id', $this->Get('connectableci_id'));
-										$oConnection->DBUpdate();
-									}
-								}
-							}
-							// print "ConnectBackPanelRemotePort ends<BR>";
-						}]]>
-                    </code>
-                </method>
-                <method id="DisconnectBackPanelRemotePort">
-                    <static>false</static>
-                    <access>protected</access>
-                    <type>Overload-cmdbAbstractObject</type>
-                    <code>
-                        <![CDATA[ protected function DisconnectBackPanelRemotePort()
-						{
-							// print "DisconnectBackPanelRemotePort begins<BR>";
-							if (!(empty($this->GetOriginal('remotebackpanelport_id'))))
-							{
-								// print "was connected_to_name = ".$this->GetOriginal('remotebackpanelport_id')."<br>";
-								// try to get the port this port was connected to
-								// This one was hard to find : adding false in the next request allow a null answer
-								// witch is OK as we have to test after operations anyway
-								// see also $$mustBeFound value for MetaModel::GetObject
-								$oInterface = MetaModel::GetObject('PatchPanelPort', $this->GetOriginal('remotebackpanelport_id'), false);
-								if (is_object($oInterface) && (get_class($oInterface) == 'PatchPanelPort'))
-								{
-									// print "Test Object OK<br>";
-									$sOQL = "SELECT PatchPanelPort WHERE remotebackpanelport_id = :device";
-									$oConnectionSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('device' => $this->GetKey(),));
-
-									// There should be one link - do it in a safe manner anyway
-									while ($oConnection = $oConnectionSet->Fetch())
-									{
-										// print "Updating : '".$oConnection->Get('name')."'<br>";
-										$oConnection->Set('remotebackpanelport_id', '');
-										// $oConnection->Set('connected_to_device_id', '');
-										$oConnection->DBUpdate();
-									}
-								}
-							}
-							// print "DisconnectBackPanelRemotePort ends<BR>";
-						}]]>
-                    </code>
-                </method>
-                <method id="AfterInsert">
-                    <static>false</static>
-                    <access>protected</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[	protected function AfterInsert()
-						{
-							$this->ConnectBackPanelRemotePort();
-							parent::AfterInsert();
-				        }]]>
-                    </code>
-                </method>
-                <method id="OnUpdate">
-                    <static>false</static>
-                    <access>protected</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[	protected function OnUpdate()
-						{
-							$this->DisconnectBackPanelRemotePort();
-							$this->ConnectBackPanelRemotePort();
-							parent::OnUpdate();
-				        }]]>
-                    </code>
-                </method>
-                <method id="OnDelete">
-                    <static>false</static>
-                    <access>protected</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[	protected function OnDelete()
-						{
-							$this->DisconnectBackPanelRemotePort();
-							parent::OnDelete();
-				        }]]>
-                    </code>
-                </method>
-            </methods>
-            <relations />
-        </class>
-    -->
 
         <!-- Virtual Server Network Interfaces (like bonding or teaming) -->
         <class id="ServerVirtualInterface" _delta="define">
@@ -1762,6 +1355,7 @@
                 </list>
             </presentation>
         </class>
+
         <class id="lnkServerVirtualInterfaceToVRF" _delta="define">
             <parent>cmdbAbstractObject</parent>
             <properties>
@@ -1894,17 +1488,6 @@
                 </details>
             </presentation>
         </class>
-        <!--
-        <class id="Model" _delta="must_exist">
-            <fields>
-                <field id="type" xsi:type="AttributeEnum" _delta="must_exist">
-                    <values>
-                        <value id="PatchPanel" _delta="define">PatchPanel</value>
-                    </values>
-                </field>
-            </fields>
-        </class>
-    -->
     </classes>
     <menus>
         <menu id="ConfigManagementOverview" xsi:type="DashboardMenuNode" _delta="must_exist">
@@ -1913,16 +1496,6 @@
                     <cell id="4" _delta="must_exist">
                         <!-- Dashboard -> Miscellaneous -->
                         <dashlets>
-                            <!--
-                            <dashlet id="87" xsi:type="DashletBadge" _delta="define">
-                                <rank>14</rank>
-                                <class>PatchPanel</class>
-                            </dashlet>
-                            <dashlet id="88" xsi:type="DashletBadge" _delta="define">
-                                <rank>15</rank>
-                                <class>PatchPanelPort</class>
-                            </dashlet>
-                            -->
                             <dashlet id="99" xsi:type="DashletBadge" _delta="define">
                                 <rank>8</rank>
                                 <class>PatchCable</class>
