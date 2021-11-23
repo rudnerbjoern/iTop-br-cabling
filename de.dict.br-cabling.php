@@ -3,7 +3,7 @@
 /**
  * @copyright   Copyright (C) 2021 Björn Rudner
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2021-04-15
+ * @version     2021-11-23
  *
  * Localized data
  */
@@ -29,11 +29,13 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 // Server Virtual Interfaces
 //
 Dict::Add('DE DE', 'German', 'Deutsch', array(
-    'Class:Server/Attribute:servervirtualinterfaces_list' => 'Virtuelle Serverschnittstellen',
-    'Class:Server/Attribute:servervirtualinterfaces_list+' => 'All the virtual interfaces configured onthis server',
-    'Class:VLAN/Attribute:servervirtualinterfaces_list' => 'Virtuelle Server-Schnittstellen',
+    'Class:Server/Attribute:servervirtualinterfaces_list' => 'Virtuelle Server-Schnittstellen',
+    'Class:Server/Attribute:servervirtualinterfaces_list+' => 'All the virtual interfaces configured on this server',
+    'Class:Server/Tab:ipaddresses_list' => 'Schnittstellen IPs',
+    'Class:Server/Tab:ipaddresses_list+' => 'Liste aller IP-Adressen aller an den Server angeschlossenen Physischen und Virtuellen Schnittstellen',
+    'Class:VLAN/Attribute:servervirtualinterfaces_list' => 'Virtuelle Server-Interfaces',
     'Class:VLAN/Attribute:servervirtualinterfaces_list+' => 'List of all virtual server network interfaces attached to the VLAN',
-    'Class:ServerVirtualInterface' => 'Virtuelle Serverschnittstelle',
+    'Class:ServerVirtualInterface' => 'Virtuelle Server-Schnittstellen',
     'Class:ServerVirtualInterface+' => '',
     'Class:ServerVirtualInterface/Attribute:server_id' => 'Server',
     'Class:ServerVirtualInterface/Attribute:vlans_list' => 'VLANs',
@@ -42,25 +44,25 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:ServerVirtualInterface/Attribute:status/Value:active' => 'Aktiv',
     'Class:ServerVirtualInterface/Attribute:status/Value:inactive' => 'Inaktiv',
 
-    'Class:lnkServerVirtualInterfaceToVLAN' => 'Link Virtuelle Serverschnittstelle / VLAN',
-    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_id' => 'Virtuelle Serverschnittstelle',
-    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_name' => 'Virtuelle Serverschnittstelle Name',
+    'Class:lnkServerVirtualInterfaceToVLAN' => 'Link Virtuelle Server-Schnittstelle / VLAN',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_id' => 'Virtuelle Server-Schnittstelle',
+    'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_name' => 'Virtuelle Server-Schnittstelle Name',
     'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_device_id' => 'Server',
     'Class:lnkServerVirtualInterfaceToVLAN/Attribute:servervirtualinterface_device_name' => 'Server Name',
     'Class:lnkServerVirtualInterfaceToVLAN/Attribute:vlan_id' => 'VLAN',
     'Class:lnkServerVirtualInterfaceToVLAN/Attribute:vlan_tag' => 'Tag',
 
-    'Class:lnkServerVirtualInterfaceToVRF' => 'Link Virtuelle Serverschnittstelle / VRF',
-    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_id' => 'Virtuelle Serverschnittstelle',
-    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_name' => 'Virtuelle Serverschnittstelle Name',
+    'Class:lnkServerVirtualInterfaceToVRF' => 'Link Virtuelle Server-Schnittstelle / VRF',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_id' => 'Virtuelle Server-Schnittstelle',
+    'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_name' => 'Virtuelle Server-Schnittstelle Name',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:servervirtualinterface_device_id' => 'Server',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:physicalinterface_device_name' => 'Server Name',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:vrf_id' => 'VRF',
     'Class:lnkServerVirtualInterfaceToVRF/Attribute:vfr_name' => 'Name',
 
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface' => 'Link Physische Schnittstelle / Virtuelle Serverschnittstelle',
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:physicalinterface_id' => 'Physical interface',
-    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id' => 'Server virtual interface',
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface' => 'Link Physische Schnittstelle / Virtuelle Server-Schnittstelle',
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:physicalinterface_id' => 'Physische Schnittstelle',
+    'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id' => 'Virtuelle Server-Schnittstelle',
     'Class:lnkPhysicalInterfaceToServerVirtualInterface/Attribute:servervirtualinterface_id+' => '',
 ));
 

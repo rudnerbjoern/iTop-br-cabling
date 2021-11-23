@@ -3,7 +3,7 @@
 /**
  * @copyright   Copyright (C) 2021 Björn Rudner
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2021-04-15
+ * @version     2021-11-23
  *
  * Localized data
  */
@@ -31,6 +31,8 @@ Dict::Add('EN US', 'English', 'English', array(
 Dict::Add('EN US', 'English', 'English', array(
     'Class:Server/Attribute:servervirtualinterfaces_list' => 'Server virtual interfaces',
     'Class:Server/Attribute:servervirtualinterfaces_list+' => 'All the virtual interfaces configured on this server',
+    'Class:Server/Tab:ipaddresses_list' => 'Interfaces\' IPs',
+    'Class:Server/Tab:ipaddresses_list+' => 'List of all IP addresses hosted by all physical and virtual interfaces attached to the Server',
     'Class:VLAN/Attribute:servervirtualinterfaces_list' => 'Virtual server interfaces',
     'Class:VLAN/Attribute:servervirtualinterfaces_list+' => 'List of all virtual server network interfaces attached to the VLAN',
     'Class:ServerVirtualInterface' => 'Server virtual interface',
