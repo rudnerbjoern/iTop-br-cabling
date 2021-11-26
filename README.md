@@ -6,7 +6,7 @@ Work in progress - expect many errors
 
 ## Patch
 
-You can use my fork at: https://github.com/rudnerbjoern/teemip-core-ip-mgmt
+You can use my fork at: https://github.com/rudnerbjoern/teemip-core-ip-mgmt/tree/2.7.1-cabling
 
 OR
 
