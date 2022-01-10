@@ -1,5 +1,8 @@
 # iTop-br-cabling
 
+Copyright (c) 2021-2022 Björn Rudner
+[![License](https://img.shields.io/github/license/rudnerbjoern/iTop-br-cabling)](https://github.com/rudnerbjoern/iTop-br-cabling/blob/main/LICENSE)
+
 iTop Extension to add cabling between CIs
 
 Work in progress - expect many errors
