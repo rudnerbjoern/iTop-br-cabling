@@ -32,9 +32,7 @@ SetupWebPage::AddModule(
 
         // Components
         //
-        'datamodel' => array(
-            'model.br-cabling.php',
-        ),
+        'datamodel' => array(),
         'webservice' => array(),
         'data.struct' => array(
             // add your 'structure' definition XML files here,
