@@ -5,7 +5,9 @@ Copyright (c) 2021-2022 Björn Rudner
 
 iTop Extension to add cabling between CIs
 
-Work in progress - expect many errors
+## Archive
+
+This project is now archived, since the extension of [TeemIP Cable Management](https://store.itophub.io/en_US/products/teemip-cable-mgmt).
 
 ## Patch
 
